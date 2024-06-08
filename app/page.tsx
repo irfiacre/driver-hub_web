@@ -1,27 +1,26 @@
-import LoginForm from "@/components/forms/LoginForm";
-import LogoComponent from "@/components/logo/LogoComponent";
+import LoginForm from "@/src/views/forms/LoginForm";
+import LogoComponent from "@/src/components/logo/LogoComponent";
 
-const background_img = "@/assets/taxi_car.jpg";
 export default function Home() {
   return (
     <main className="flex flex-row">
-      <div className="w-full flex flex-col justify-around items-center gap-10">
-        <div>
+      <div className="w-full flex flex-col items-center gap-2">
+        <div className="mt-28">
           <LogoComponent />
         </div>
         <div>
           <p className="text-textDarkColor text-2xl font-semibold">
             Login to Dashboard
           </p>
-          <p className="text-textLightColor text-sm text-center">
+          <p className="py-2 text-textLightColor text-sm text-center">
             Complete details to sign in
           </p>
         </div>
-        <div className="w-full">
+        <div className="w-full flex justify-center">
           <LoginForm />
         </div>
       </div>
-      <div className=" w-full bg-taxiMeter"></div>
+      <div className="max-sm:hidden w-full bg-taxiMeter h-lvh bg-cover bg-no-repeat bg-center brightness-50"></div>
     </main>
   );
 }

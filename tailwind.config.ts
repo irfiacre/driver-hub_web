@@ -13,9 +13,11 @@ const config: Config = {
       },
       colors: {
         primary: "#D51B53",
+        primaryDark: "#7F1032",
         textDarkColor: "#353546",
         textLightColor: "#858597",
         backgroundColor: "#F7F8FC",
+        backgroundColor2: "#DFE0EB",
         borderColorLight: "#B8B8D2",
       },
     },
