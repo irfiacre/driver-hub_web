@@ -9,9 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        taxiMeter: "url('/img/taxi_car.jpg')",
+      },
+      colors: {
+        primary: "#D51B53",
+        textDarkColor: "#353546",
+        textLightColor: "#858597",
+        backgroundColor: "#F7F8FC",
+        borderColorLight: "#B8B8D2",
       },
     },
   },
