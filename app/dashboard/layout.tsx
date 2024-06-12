@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "../globals.css";
 import { primaryColorBg } from "@/constants/colors";
+import { Sidebar } from "@/src/views/navigation/sidebar/Sidebar";
+import TopNav from "@/src/views/navigation/topNavbar/TopNav";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: "400",
+  weight: "500",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +27,18 @@ export default function RootLayout({
         className={poppins.className}
         style={{ backgroundColor: primaryColorBg }}
       >
-        {children}
+        <div className="flex flex-row">
+          <div className="w-2/4">
+            <Sidebar />
+          </div>
+
+          <main className="w-full">
+            <div className="">
+              <TopNav />
+            </div>
+            <div>{children}</div>
+          </main>
+        </div>
       </body>
     </html>
   );
