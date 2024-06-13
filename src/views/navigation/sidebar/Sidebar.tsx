@@ -38,7 +38,10 @@ export const Sidebar = () => {
     ],
   };
   return (
-    <div className="px-6 py-9">
+    <div
+      className="px-6 py-9 border-r-borderColorLight"
+      style={{ backgroundColor: "#F7F8FA" }}
+    >
       <div>
         <LogoComponent small />
         <div>
