@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const MenuItem = ({ content }: { content: any }) => {
-  const pathname = usePathname();
+  const pathname: any = usePathname();
   const active = pathname.includes(content.url);
 
   return (

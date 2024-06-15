@@ -32,7 +32,7 @@ export default function RootLayout({
             <Sidebar />
           </div>
 
-          <main className="w-full">
+          <main className="w-full p-6 mt-8">
             <div className="">
               <TopNav />
             </div>
