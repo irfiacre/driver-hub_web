@@ -1,7 +1,7 @@
 "use client";
 import SearchableInput from "@/src/components/inputs/SearchInput";
 import LogoComponent from "@/src/components/logo/LogoComponent";
-import React from "react";
+import React, { useState } from "react";
 import MenuSection, { MenuItem } from "./MenuSection";
 
 export const Sidebar = () => {
@@ -43,18 +43,20 @@ export const Sidebar = () => {
       },
     ],
   };
-  const handleSidebarSearch = () => console.log("======");
+  const [searchText, setSearchText] = useState("");
+
+  const handleSidebarSearch = (e: any) => {
+    e.preventDefault();
+    setSearchText(e.target.value);
+  };
   return (
-    <div
-      className="px-6 py-9 border-r-borderColorLight"
-      style={{ backgroundColor: "#F7F8FA" }}
-    >
+    <div className="px-6 py-9 border border-r-sidebarBorderColor h-lvh flex flex-col gap-6">
       <div>
         <LogoComponent small />
         <div>
           <SearchableInput
             inputID="sidebarSearch"
-            value={""}
+            value={searchText}
             onInputChange={handleSidebarSearch}
           />
         </div>
@@ -68,8 +70,12 @@ export const Sidebar = () => {
           menuItems={sidebarMenu.applications}
         />
       </div>
-      <div>Onboarding</div>
-      <div>Courses</div>
+      <div>
+        <MenuSection title="Onboarding" menuItems={sidebarMenu.onboarding} />
+      </div>
+      <div className="py-6 ml-4">
+        <p className="text-textLightColor text-xl">Courses</p>
+      </div>
     </div>
   );
 };

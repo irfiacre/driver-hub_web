@@ -12,17 +12,19 @@ export const MenuItem = ({ content }: { content: any }) => {
     <Link href={`${content.url}`} scroll={false}>
       <div
         className={`py-4 px-3 mx-3 flex flex-row justify-start items-center gap-4 ${
-          active ? "bg-primary rounded-xl" : ""
+          active
+            ? "bg-primary rounded-xl"
+            : " hover:bg-menuIconBackground hover:rounded-xl"
         }`}
       >
         <div
-          className={`h-10 w-10 flex items-center justify-center rounded-full${
-            active ? "bg-primary" : "bg-menuIconBackground "
+          className={`h-10 w-10 flex items-center justify-center rounded-full  ${
+            active ? "bg-primary" : "bg-menuIconBackground"
           }`}
         >
           <Icon
             icon={content.icon}
-            fontSize={25}
+            fontSize={active ? 25 : 20}
             className={active ? "text-white" : ""}
           />
         </div>
@@ -51,8 +53,8 @@ const MenuSection = ({
   menuItems: Array<any>;
 }) => {
   return (
-    <div className="py-6 ml-4">
-      <p className="text-textLightColor text-2xl">{title}</p>
+    <div className=" ml-4">
+      <p className="text-textLightColor text-xl">{title}</p>
       {menuItems.map((item) => (
         <MenuItem key={item.title} content={item} />
       ))}

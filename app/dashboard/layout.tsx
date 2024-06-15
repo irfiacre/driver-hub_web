@@ -28,7 +28,7 @@ export default function RootLayout({
         style={{ backgroundColor: primaryColorBg }}
       >
         <div className="flex flex-row">
-          <div className="w-2/4">
+          <div className="w-2/6">
             <Sidebar />
           </div>
 

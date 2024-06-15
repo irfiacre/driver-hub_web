@@ -21,6 +21,8 @@ const config: Config = {
         backgroundColor2: "#DFE0EB",
         menuIconBackground: "#EAEAFF",
         borderColorLight: "#B8B8D2",
+        sidebarBorderColor: "#E6E6E6",
+        primary_10: "rgb(213,27,83, 70%)",
       },
     },
   },
