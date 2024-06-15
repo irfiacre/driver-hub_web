@@ -19,6 +19,7 @@ const config: Config = {
         textLightColor: "#858597",
         backgroundColor: "#F7F8FC",
         backgroundColor2: "#DFE0EB",
+        menuIconBackground: "#EAEAFF",
         borderColorLight: "#B8B8D2",
       },
     },
