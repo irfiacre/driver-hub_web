@@ -1,3 +1,5 @@
+// import { Poppins } from "next/font/google";
+
 export const emailValidate = (email: string) => {
   if (!email) return "No Email Provided!";
   const re =
@@ -8,3 +10,13 @@ export const emailValidate = (email: string) => {
     return "Invalid Email!";
   }
 };
+
+// export const changeTextWeight = (fontWeight: string): string => {
+//   const weight = fontWeight ? fontWeight : "100";
+//   const poppins = Poppins({
+//     subsets: ["latin"],
+//     weight: `${fontWeight}`,
+//   });
+
+//   return poppins.className;
+// };
