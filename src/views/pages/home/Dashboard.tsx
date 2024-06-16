@@ -3,7 +3,7 @@ import BaseCard from "@/src/components/cards/BaseCard";
 import Chart from "@/src/components/charts/Chart";
 import React from "react";
 
-const Dashboard = () => {
+const DashboardPage = () => {
   const analytics = [
     {
       title: "Applications",
@@ -29,10 +29,10 @@ const Dashboard = () => {
     { title: "Available courses", count: 30 },
   ];
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-5">
       <div className="flex flex-row flex-wrap justify-between items-center gap-1.5 py-1.5">
         {analytics.map((item) => (
-          <div className="w-60 h-36" key={item.title}>
+          <div className="w-60 h-36 py-1.5" key={item.title}>
             <AnalyticsCard title={item.title} count={item.count} />
           </div>
         ))}
@@ -64,4 +64,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;

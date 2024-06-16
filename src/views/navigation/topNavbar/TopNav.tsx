@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-const TopNav = ({ title }: { title: string }) => {
-  const avatarURL = "https://i.pravatar.cc";
+const TopNav = ({ user, title }: { user: any; title: string }) => {
   const [isActive, handleDropdown] = useState(false);
   return (
     <div className="flex flex-row justify-between">
@@ -15,14 +14,14 @@ const TopNav = ({ title }: { title: string }) => {
           <Icon icon="zondicons:notification" fontSize={20} />
         </div>
         <div>|</div>
-        <div>Lego Admin</div>
+        <div>{user.name}</div>
         <div>
           <div className="relative inline-block text-left">
             <div onClick={() => handleDropdown((prevState) => !prevState)}>
               <Image
                 className="rounded-full cursor-pointer hover:border hover:border-borderColorLight"
-                loader={() => avatarURL}
-                src={avatarURL}
+                loader={() => user.photoUrl}
+                src={user.photoUrl}
                 alt="Rounded avatar"
                 height={40}
                 width={40}

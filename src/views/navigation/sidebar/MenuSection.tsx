@@ -6,10 +6,16 @@ import { usePathname } from "next/navigation";
 
 export const MenuItem = ({ content }: { content: any }) => {
   const pathname: any = usePathname();
-  const active = pathname.includes(content.url);
+  const active =
+    content.url === "dashboard"
+      ? pathname === "/"
+      : pathname.includes(content.url);
 
   return (
-    <Link href={`${content.url}`} scroll={false}>
+    <Link
+      href={`${content.url === "dashboard" ? "/" : content.url}`}
+      scroll={false}
+    >
       <div
         className={`py-4 px-3 mx-3 flex flex-row justify-start items-center gap-4 ${
           active
