@@ -1,6 +1,7 @@
 import AnalyticsCard from "@/src/components/cards/AnalyticsCard";
 import BaseCard from "@/src/components/cards/BaseCard";
 import Chart from "@/src/components/charts/Chart";
+import SearchableTable from "@/src/components/tables/SearchableTable";
 import React from "react";
 
 const Dashboard = () => {
@@ -22,18 +23,10 @@ const Dashboard = () => {
       count: 5,
     },
   ];
-
-  const moreStatistics = [
-    { title: "Finished Onboarding", count: 456 },
-    { title: "Currently Onboarding", count: 120 },
-    { title: "Available courses", count: 30 },
-  ];
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <BaseCard>
-          <strong>Some Table</strong>
-        </BaseCard>
+        <SearchableTable />
       </div>
     </div>
   );
