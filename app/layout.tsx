@@ -32,10 +32,10 @@ export default function RootLayout({
           children
         ) : (
           <div className="flex flex-row">
-            <div className={`${isActive ? "w-3/4" : "sm:w-2/6"}`}>
+            <div className={`${isActive ? "w-3/4" : "md:w-2/6"}`}>
               <button
                 type="button"
-                className="sm:hidden inline-flex items-center p-2 mt-2 ms-3 text-sm text-primary rounded-lg bg-gray-100 fixed z-10"
+                className="md:hidden inline-flex items-center p-2 mt-2 ms-3 text-sm text-primary rounded-lg bg-gray-100 fixed z-10"
                 onClick={() => showSidebar((prevState) => !prevState)}
               >
                 <span className="sr-only">Open sidebar</span>
@@ -55,7 +55,7 @@ export default function RootLayout({
               </button>
               <div
                 className={`w-full ${
-                  isActive ? "fixed bg-backgroundColor" : "max-sm:hidden"
+                  isActive ? "fixed bg-backgroundColor" : "max-md:hidden"
                 }`}
               >
                 <Sidebar />

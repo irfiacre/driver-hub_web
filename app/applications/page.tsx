@@ -1,32 +1,53 @@
-import AnalyticsCard from "@/src/components/cards/AnalyticsCard";
-import BaseCard from "@/src/components/cards/BaseCard";
-import Chart from "@/src/components/charts/Chart";
-import SearchableTable from "@/src/components/tables/SearchableTable";
 import React from "react";
+import SearchableTable from "@/src/components/tables/SearchableTable";
 
 const Dashboard = () => {
-  const analytics = [
+  const applicationsData = [
     {
-      title: "Applications",
-      count: 150,
+      applicant: "Applicant Name 1",
+      status: "Pending",
+      description:
+        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+      createdAt: new Date(),
+      photoUrl: "https://i.pravatar.cc/300",
     },
     {
-      title: "Accepted",
-      count: 121,
+      applicant: "Applicant Name 2",
+      status: "Approved",
+      description:
+        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+      createdAt: new Date(),
+      photoUrl: "https://i.pravatar.cc/300",
     },
     {
-      title: "Pending",
-      count: 10,
+      applicant: "Applicant Name 3",
+      status: "Approved",
+      description:
+        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+      createdAt: new Date(),
+      photoUrl: "https://i.pravatar.cc/300",
     },
     {
-      title: "Rejected",
-      count: 5,
+      applicant: "Applicant Name 4",
+      status: "Pending",
+      description:
+        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+      createdAt: new Date(),
+      photoUrl: "https://i.pravatar.cc/300",
+    },
+    {
+      applicant: "Applicant Name 5",
+      status: "Rejected",
+      description:
+        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+      createdAt: new Date(),
+      photoUrl: "https://i.pravatar.cc/300",
     },
   ];
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <SearchableTable />
+        <SearchableTable data={applicationsData} />
       </div>
     </div>
   );
