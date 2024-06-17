@@ -1,20 +1,16 @@
+"use client";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { primaryColorBg } from "@/constants/colors";
 import { Sidebar } from "@/src/views/navigation/sidebar/Sidebar";
 import TopNav from "@/src/views/navigation/topNavbar/TopNav";
+import { useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
-
-export const metadata: Metadata = {
-  title: "Driver Hub",
-  description:
-    "Drive Hub is a specialized software solution designed to streamline the driver recruitment and onboarding process for YEGO, addressing the unique needs of the transportation industry in Rwanda. The platform focuses on efficiently recruiting qualified drivers, conducting necessary background checks, and facilitating comprehensive training programs to ensure a safe and reliable transportation service.",
-};
 
 export default function RootLayout({
   children,
@@ -25,7 +21,7 @@ export default function RootLayout({
     photoUrl: "https://i.pravatar.cc",
     name: "Lego Admin",
   };
-
+  const [isActive, showSidebar] = useState(false);
   return (
     <html lang="en">
       <body
@@ -36,8 +32,34 @@ export default function RootLayout({
           children
         ) : (
           <div className="flex flex-row">
-            <div className="w-2/6">
-              <Sidebar />
+            <div className={`${isActive ? "w-3/4" : "sm:w-2/6"}`}>
+              <button
+                type="button"
+                className="sm:hidden inline-flex items-center p-2 mt-2 ms-3 text-sm text-primary rounded-lg bg-gray-100 fixed z-10"
+                onClick={() => showSidebar((prevState) => !prevState)}
+              >
+                <span className="sr-only">Open sidebar</span>
+                <svg
+                  className="w-6 h-6"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+                  ></path>
+                </svg>
+              </button>
+              <div
+                className={`w-full ${
+                  isActive ? "fixed bg-backgroundColor" : "max-sm:hidden"
+                }`}
+              >
+                <Sidebar />
+              </div>
             </div>
 
             <main className="w-full p-6 mt-8">
