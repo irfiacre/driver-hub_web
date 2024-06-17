@@ -4,9 +4,15 @@ interface InputProps {
   inputID: string;
   value: string;
   onInputChange: (e: any) => void;
+  inputClassName?: string;
 }
 
-const SearchableInput = ({ inputID, value, onInputChange }: InputProps) => {
+const SearchableInput = ({
+  inputID,
+  value,
+  onInputChange,
+  inputClassName,
+}: InputProps) => {
   return (
     <div className="p-3.5">
       <label
@@ -19,7 +25,7 @@ const SearchableInput = ({ inputID, value, onInputChange }: InputProps) => {
         <input
           type="search"
           id={inputID}
-          className="block w-full p-4 ps-10 h-12 bg-backgroundColor border border-borderColorLight focus:bg-backgroundColor2 focus:border-borderColorLight text-md rounded-xl  focus:outline-none"
+          className={`block w-full p-4 ps-10 h-12 bg-backgroundColor border border-borderColorLight focus:bg-backgroundColor2 focus:border-borderColorLight text-md focus:outline-none ${inputClassName}`}
           placeholder="Search..."
           value={value}
           onChange={onInputChange}

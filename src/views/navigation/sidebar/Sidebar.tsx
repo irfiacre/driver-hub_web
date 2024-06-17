@@ -58,6 +58,7 @@ export const Sidebar = () => {
             inputID="sidebarSearch"
             value={searchText}
             onInputChange={handleSidebarSearch}
+            inputClassName="rounded-xl"
           />
         </div>
       </div>

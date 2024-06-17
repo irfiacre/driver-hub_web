@@ -16,16 +16,17 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
         inputID="sidebarSearch"
         value={searchText}
         onInputChange={handleSidebarSearch}
+        inputClassName="rounded-md"
       />
-      <div>Applications</div>
+      <div className="py-5 text-primary text-base">Applications</div>
       <hr />
       <div>
         {data.map((item) => (
           <div key={item.applicant}>
-            <div className="flex flex-row align-middle items-center justify-between">
+            <div className="flex flex-row align-middle items-center justify-between py-2.5 px-1.5 gap-3.5 cursor-pointer hover:bg-primary_3">
               <div className="">
                 <Image
-                  className="rounded-full cursor-pointer hover:border hover:border-borderColorLight"
+                  className="rounded-full cursor-pointer"
                   loader={() => item.photoUrl}
                   src={item.photoUrl}
                   alt="Rounded avatar"
@@ -34,11 +35,23 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
                   unoptimized
                 />
               </div>
-              <div>
-                <span>{item.description.substring(0, 100)}</span>
-                <div className="">
-                  <span>{item.applicant}</span>
-                  <span>{item.status}</span>
+              <div className="text-sm">
+                <span className="text-textLightColor font-light">
+                  {item.description.substring(0, 100)}
+                </span>
+                <div className="flex flex-row align-middle items-center gap-2.5 py-1.5">
+                  <span className="font-semibold">{item.applicant}</span>
+                  <span
+                    className={`font-light text-xs ${
+                      item.status === "Approved"
+                        ? "text-successGreen"
+                        : item.status === "Rejected"
+                        ? "text-red-600"
+                        : "text-textLightColor"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
                 </div>
               </div>
               <div></div>
