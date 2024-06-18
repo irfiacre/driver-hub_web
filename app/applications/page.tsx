@@ -1,7 +1,7 @@
 import React from "react";
 import SearchableTable from "@/src/components/tables/SearchableTable";
 
-const Dashboard = () => {
+const Applications = () => {
   const applicationsData = [
     {
       applicant: "Lego Admin",
@@ -53,4 +53,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Applications;
