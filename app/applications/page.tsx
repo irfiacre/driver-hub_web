@@ -4,7 +4,7 @@ import SearchableTable from "@/src/components/tables/SearchableTable";
 const Dashboard = () => {
   const applicationsData = [
     {
-      applicant: "Applicant Name 1",
+      applicant: "Lego Admin",
       status: "Pending",
       description:
         "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
@@ -12,7 +12,7 @@ const Dashboard = () => {
       photoUrl: "https://i.pravatar.cc/300",
     },
     {
-      applicant: "Applicant Name 2",
+      applicant: "Steve Jobs",
       status: "Approved",
       description:
         "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
@@ -20,7 +20,7 @@ const Dashboard = () => {
       photoUrl: "https://i.pravatar.cc/300",
     },
     {
-      applicant: "Applicant Name 3",
+      applicant: "David Goggins",
       status: "Approved",
       description:
         "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
@@ -28,7 +28,7 @@ const Dashboard = () => {
       photoUrl: "https://i.pravatar.cc/300",
     },
     {
-      applicant: "Applicant Name 4",
+      applicant: "John Doe",
       status: "Pending",
       description:
         "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
@@ -36,7 +36,7 @@ const Dashboard = () => {
       photoUrl: "https://i.pravatar.cc/300",
     },
     {
-      applicant: "Applicant Name 5",
+      applicant: "Jane Doe",
       status: "Rejected",
       description:
         "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
