@@ -25,6 +25,7 @@ const config: Config = {
         primary_3: "rgb(213,27,83, 3%)",
         notificationIconColor: "#AAACBD",
         successGreen: "#00BF63",
+        modalBackground: "#911259",
       },
     },
   },

@@ -1,6 +1,6 @@
 import AnalyticsCard from "@/src/components/cards/AnalyticsCard";
 import BaseCard from "@/src/components/cards/BaseCard";
-import Chart from "@/src/components/charts/Chart";
+// import Chart from "@/src/components/charts/Chart";
 import React from "react";
 
 const DashboardPage = () => {
@@ -37,9 +37,9 @@ const DashboardPage = () => {
           </div>
         ))}
       </div>
-      <div>
+      {/* <div>
         <Chart title="Weekly Onboarding hours" />
-      </div>
+      </div> */}
       <div className="flex flex-row justify-between gap-5">
         <BaseCard className="px-10 py-5">
           <div className="flex flex-row justify-between p-1.5 mb-5">
