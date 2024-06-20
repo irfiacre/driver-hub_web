@@ -107,6 +107,14 @@ const Application = () => {
       </div>
       <div>
         <h1>Trainings</h1>
+        <div>
+          {application.onboardingPlan.map((plan) => (
+            <div key={plan.title}>
+              <h3>{plan.title}</h3>
+              <span className="text-primary">{plan.duration} hours</span>
+            </div>
+          ))}
+        </div>
       </div>
     </BaseCard>
   );
