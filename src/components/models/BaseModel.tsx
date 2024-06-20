@@ -4,16 +4,19 @@ import BaseCard from "../cards/BaseCard";
 const BaseModel = ({
   title,
   children,
+  containerStyle,
   onClose,
 }: {
   title: string;
   children: any;
   onClose: () => void;
+  containerStyle?: string;
 }) => {
   return (
     <div className="fixed inset-0 bg-modalBackground bg-opacity-50 transition-opacity flex justify-center items-center">
-      <div className="w-6/12">
-        <BaseCard className=" h-1/4">
+      <div className={containerStyle}>
+        {/* sdklsd */}
+        <BaseCard className="h-1/4">
           <div className="flex flex-row items-center justify-between p-5">
             <h1 className="text-xl text-textLightColor font-normal capitalize">
               {title}

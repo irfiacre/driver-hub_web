@@ -79,10 +79,11 @@ const Application = () => {
           <BaseModel
             title={selectedDocument.name}
             onClose={() => setSelectedDocument(null)}
+            containerStyle=" w-4/5"
           >
-            <div className="py-5">
+            <div className="p-1.5">
               <Image
-                className="w-full h-1/4 cursor-pointer bg-textLightColor"
+                className="w-full h-96 cursor-pointer bg-textLightColor object-cover rounded-sm"
                 loader={() => selectedDocument.url}
                 src={selectedDocument.url}
                 alt="Applicant photo"
