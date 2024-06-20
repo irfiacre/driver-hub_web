@@ -1,14 +1,19 @@
 "use client";
 import PillComponent from "@/src/components/PillComponent";
 import BaseCard from "@/src/components/cards/BaseCard";
-import ImageModel from "@/src/components/models/ImageModel";
+import BaseModel from "@/src/components/models/BaseModel";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+
+interface DocumentProps {
+  name: string;
+  type: string;
+  url: string;
+}
 
 const Application = () => {
   const params = useParams();
-  console.log(params);
   const application = {
     applicant: {
       name: "Lego Applicant",
@@ -45,6 +50,8 @@ const Application = () => {
       { title: "Road Safety", duration: 90 },
     ],
   };
+  const [selectedDocument, setSelectedDocument] =
+    useState<DocumentProps | null>(null);
 
   return (
     <BaseCard className="px-10 py-5 flex flex-row divide-x-1">
@@ -68,11 +75,32 @@ const Application = () => {
             <span>{application.driverLicenseNumber}</span>
           </p>
         </div>
-        {/* <ImageModel title="xxxzzz" imageUrl="xxxyyy" open={false} /> */}
+        {selectedDocument && (
+          <BaseModel
+            title={selectedDocument.name}
+            onClose={() => setSelectedDocument(null)}
+          >
+            <div className="py-5">
+              <Image
+                className="w-full h-1/4 cursor-pointer bg-textLightColor"
+                loader={() => selectedDocument.url}
+                src={selectedDocument.url}
+                alt="Applicant photo"
+                height={100}
+                width={100}
+                unoptimized
+              />
+            </div>
+          </BaseModel>
+        )}
         <h2>Documents</h2>
         <div className="flex flex-row flex-wrap">
           {application.documents.map((document) => (
-            <PillComponent key={document.name} text={document.name} />
+            <PillComponent
+              key={document.name}
+              text={document.name}
+              handleClick={() => setSelectedDocument(document)}
+            />
           ))}
         </div>
       </div>
