@@ -1,12 +1,15 @@
 "use client";
-import { COURSES_ARRAY } from "@/constants/fixtures";
+import {
+  APPLICATION_DETAILS,
+  COURSES_ARRAY,
+  OFFICER,
+} from "@/constants/fixtures";
 import Course from "@/src/components/Course";
 import PillComponent from "@/src/components/PillComponent";
 import BaseCard from "@/src/components/cards/BaseCard";
 import SearchableInput from "@/src/components/inputs/SearchInput";
 import BaseModel from "@/src/components/models/BaseModel";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface DocumentProps {
@@ -16,50 +19,8 @@ interface DocumentProps {
 }
 
 const Application = () => {
-  const params = useParams();
-  const application = {
-    applicant: {
-      name: "Lego Applicant",
-      photoUrl: "https://i.pravatar.cc",
-      id: params?.id,
-    },
-    nationalID: "XXXXX-XXXX-XXX",
-    driverLicenseNumber: "XXXXX-XXXX-XXX",
-    createdAt: new Date(),
-    status: "pending",
-    documents: [
-      {
-        name: "national id",
-        type: "jpeg",
-        url: "https://picsum.photos/400/500.jpg",
-      },
-      {
-        name: "Proof of ownership",
-        type: "jpeg",
-        url: "https://picsum.photos/400/500.jpg",
-      },
-      {
-        name: "Certificate of Good Conduct",
-        type: "jpeg",
-        url: "https://picsum.photos/400/500.jpg",
-      },
-      {
-        name: "Last car checkup",
-        type: "jpeg",
-        url: "https://picsum.photos/400/500.jpg",
-      },
-    ],
-    onboardingPlan: [
-      { title: "Introduction", duration: 1 },
-      { title: "[HowTo] - Driver Tool Kit", duration: 1.5 },
-      { title: "Road Safety", duration: 0.5 },
-    ],
-  };
-  const user = {
-    photoUrl: "https://i.pravatar.cc",
-    name: "Lego Admin",
-    role: "officer",
-  };
+  const application = APPLICATION_DETAILS;
+  const user = OFFICER;
   const [selectedDocument, setSelectedDocument] =
     useState<DocumentProps | null>(null);
   const [searchedCourse, setSearchedCourse] = useState<string>("");

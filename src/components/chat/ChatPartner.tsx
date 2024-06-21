@@ -1,0 +1,41 @@
+import React from "react";
+import { Icon } from "@iconify/react";
+import Image from "next/image";
+
+interface ChatPartnerProps {
+  photoUrl: string;
+  name: string;
+  lastMessage: string;
+}
+
+const ChatPartner = ({ photoUrl, name, lastMessage }: ChatPartnerProps) => {
+  return (
+    <div className="cursor-pointer flex flex-row items-center justify-evenly hover:bg-primary/5 py-2.5">
+      <Image
+        className="rounded-full w-16 bg-textLightColor"
+        loader={() => photoUrl}
+        src={photoUrl}
+        alt="Applicant photo"
+        height={100}
+        width={100}
+        unoptimized
+      />
+      <div>
+        <p className="text-textLightColor text-lg font-medium">{name}</p>
+        <p className="text-sm font-light text-wrap">
+          {lastMessage.substring(0, 20)} <br /> {lastMessage.substring(20, 30)}
+          ...
+        </p>
+      </div>
+      <div className="h-10 w-10 flex items-center justify-center rounded-full   bg-menuIconBackground">
+        <Icon
+          icon="ic:baseline-message"
+          fontSize={20}
+          className={"text-textLightColor"}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default ChatPartner;

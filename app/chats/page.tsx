@@ -1,42 +1,17 @@
-import AnalyticsCard from "@/src/components/cards/AnalyticsCard";
-import BaseCard from "@/src/components/cards/BaseCard";
-import Chart from "@/src/components/charts/Chart";
+import { APPLICANT, generateApplicant } from "@/constants/fixtures";
+import ChatPage from "@/src/pages/ChatPage";
 import React from "react";
 
-const Dashboard = () => {
-  const analytics = [
-    {
-      title: "Applications",
-      count: 150,
-    },
-    {
-      title: "Accepted",
-      count: 121,
-    },
-    {
-      title: "Pending",
-      count: 10,
-    },
-    {
-      title: "Rejected",
-      count: 5,
-    },
-  ];
-
-  const moreStatistics = [
-    { title: "Finished Onboarding", count: 456 },
-    { title: "Currently Onboarding", count: 120 },
-    { title: "Available courses", count: 30 },
-  ];
+const Chat = () => {
+  const applicants = [];
+  for (let index = 0; index < 20; index++) {
+    applicants.push(generateApplicant());
+  }
   return (
     <div className="flex flex-col gap-3">
-      <div>
-        <BaseCard>
-          <strong>Some Table</strong>
-        </BaseCard>
-      </div>
+      <ChatPage applicants={applicants} />
     </div>
   );
 };
 
-export default Dashboard;
+export default Chat;
