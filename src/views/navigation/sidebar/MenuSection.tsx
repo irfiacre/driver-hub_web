@@ -13,7 +13,7 @@ export const MenuItem = ({ content }: { content: any }) => {
 
   return (
     <Link
-      href={`${content.url === "dashboard" ? "/" : content.url}`}
+      href={`/${content.url === "dashboard" ? "/" : content.url}`}
       scroll={false}
     >
       <div
