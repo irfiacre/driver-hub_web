@@ -11,6 +11,7 @@ export default function Home() {
   const user = {
     photoUrl: "https://i.pravatar.cc",
     name: "Lego Admin",
+    role: "admin",
   };
 
   return !user ? <LoginPage /> : <DashboardPage />;

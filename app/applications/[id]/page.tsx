@@ -3,7 +3,7 @@ import { COURSES_ARRAY } from "@/constants/fixtures";
 import Course from "@/src/components/Course";
 import PillComponent from "@/src/components/PillComponent";
 import BaseCard from "@/src/components/cards/BaseCard";
-import IconInput from "@/src/components/inputs/IconInput";
+import SearchableInput from "@/src/components/inputs/SearchInput";
 import BaseModel from "@/src/components/models/BaseModel";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -25,6 +25,8 @@ const Application = () => {
     },
     nationalID: "XXXXX-XXXX-XXX",
     driverLicenseNumber: "XXXXX-XXXX-XXX",
+    createdAt: new Date(),
+    status: "pending",
     documents: [
       {
         name: "national id",
@@ -53,21 +55,60 @@ const Application = () => {
       { title: "Road Safety", duration: 0.5 },
     ],
   };
+  const user = {
+    photoUrl: "https://i.pravatar.cc",
+    name: "Lego Admin",
+    role: "officer",
+  };
   const [selectedDocument, setSelectedDocument] =
     useState<DocumentProps | null>(null);
   const [searchedCourse, setSearchedCourse] = useState<string>("");
+  const [courses, setCourses] = useState<Array<any>>([]);
 
   useEffect(() => {
     // To Update searched course
+    console.log(
+      "=====",
+      COURSES_ARRAY.filter((elt) =>
+        elt.title
+          .toLocaleLowerCase()
+          .includes(searchedCourse.toLocaleLowerCase())
+      )
+    );
+
+    if (searchedCourse.length > 0) {
+      setCourses(
+        COURSES_ARRAY.filter((elt) => elt.title.includes(searchedCourse))
+      );
+    }
   }, [searchedCourse]);
   const handleInputChange = (e: any) => {
     e.preventDefault();
-    setSearchedCourse(e.target.value);
+    setSearchedCourse(e.target.value.trim());
   };
-  const handleIconClick = () => {};
+  const handleCourseClick = (course: any) => {
+    console.log("Should Add course to Applicant onboarding", course);
+  };
+
+  const handleOpenChat = () => {
+    console.log("Handle Open chat");
+  };
+  const handleSecondaryBtn = (condition: string) => {
+    switch (condition) {
+      case "approve":
+        console.log("Handle approve");
+        break;
+      case "delete":
+        console.log("Handle delete");
+        break;
+      default:
+        console.log("Handle mark ready");
+        break;
+    }
+  };
 
   return (
-    <BaseCard className="px-10 py-5 flex md:flex-row sm:flex-col divide-x-2">
+    <BaseCard className="px-10 py-10 flex flex-row max-md:flex-col max-md:divide-y-2 md:divide-x-2 text-textDarkColor">
       <div className="w-full">
         <Image
           className="rounded-xl cursor-pointer w-52 bg-textLightColor"
@@ -78,14 +119,21 @@ const Application = () => {
           width={100}
           unoptimized
         />
-        <h1>{application.applicant.name}</h1>
+        <h1 className="text-2xl py-5 font-semibold text-textDarkColor">
+          {application.applicant.name}
+        </h1>
         <div>
-          <p>
-            NationalID number:<span>{application.nationalID}</span>
+          <p className="text-base text-textLightColor font-medium py-1.5">
+            National ID:
+            <span className="text-textDarkColor font-light px-5">
+              {application.nationalID}
+            </span>
           </p>
-          <p>
-            Driver License Number:
-            <span>{application.driverLicenseNumber}</span>
+          <p className="text-base text-textLightColor font-medium py-1.5">
+            Driver License:
+            <span className="text-textDarkColor font-light px-5">
+              {application.driverLicenseNumber}
+            </span>
           </p>
         </div>
         {selectedDocument && (
@@ -107,7 +155,8 @@ const Application = () => {
             </div>
           </BaseModel>
         )}
-        <h2>Documents</h2>
+
+        <h2 className="text-xl py-5">Documents</h2>
         <div className="flex flex-row flex-wrap">
           {application.documents.map((document) => (
             <PillComponent
@@ -117,10 +166,19 @@ const Application = () => {
             />
           ))}
         </div>
+        <div className="text-center py-10">
+          <button
+            type="button"
+            onClick={handleOpenChat}
+            className="-ml-16 px-16 h-16 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-xl text-base text-center py-3"
+          >
+            Open Chat
+          </button>
+        </div>
       </div>
-      <div className="w-full px-10">
+      <div className="w-full md:px-10 max-md:pt-10">
         <h1 className="text-xl font-semibold text-textLightColor pb-5">
-          Trainings
+          Onboarding Plan
         </h1>
         <div>
           {application.onboardingPlan.map((plan) => (
@@ -130,31 +188,67 @@ const Application = () => {
             </div>
           ))}
           <div className="py-1.5">
-            <IconInput
-              inputID="course"
+            <SearchableInput
+              inputID="courseSearch"
               value={searchedCourse}
               onInputChange={handleInputChange}
-              onIconClick={handleIconClick}
               inputClassName="rounded-lg"
+              placeholder="Search course to add..."
             />
+
             <div className="p-1.5">
-              <BaseCard>
-                {COURSES_ARRAY.map((course, index) => (
-                  <div key={course.id}>
-                    <div
-                      className={`px-1.5 cursor-pointer hover:bg-primary/25 ${
-                        index === 0 && "rounded-t-lg"
-                      }`}
-                    >
-                      <Course title={course.title} duration={course.duration} />
+              {courses.length > 0 && (
+                <BaseCard>
+                  {courses.map((course, index) => (
+                    <div key={course.id}>
+                      <div
+                        className={`px-1.5 cursor-pointer hover:bg-primary/25 ${
+                          index === 0 && "rounded-t-lg"
+                        }`}
+                        onClick={() => handleCourseClick(course)}
+                      >
+                        <Course
+                          title={course.title}
+                          duration={course.duration}
+                        />
+                      </div>
+                      <hr />
                     </div>
-                    <hr />
-                  </div>
-                ))}
-              </BaseCard>
+                  ))}
+                </BaseCard>
+              )}
             </div>
           </div>
         </div>
+
+        {user.role !== "admin" ? (
+          <div className="text-center py-10">
+            <button
+              type="button"
+              onClick={() => handleSecondaryBtn("markReady")}
+              className="px-16 h-16 text-primary border border-primary hover:bg-successGreen hover:text-white hover:border-none focus:outline-none font-medium rounded-xl text-base text-center py-3"
+            >
+              Mark Ready for Approval
+            </button>
+          </div>
+        ) : (
+          <div className="py-10 flex flex-row justify-center items-center gap-5">
+            <button
+              type="button"
+              onClick={() => handleSecondaryBtn("approve")}
+              className="px-10 py-3 border border-successGreen/60 text-successGreen hover:bg-successGreen hover:text-white focus:outline-none font-medium rounded-xl text-base text-center"
+            >
+              Approve
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSecondaryBtn("delete")}
+              className="px-10 py-3 text-red-500 border border-red-500 hover:bg-red-500 hover:text-white hover:border-none focus:outline-none font-medium rounded-xl text-base text-center"
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </BaseCard>
   );

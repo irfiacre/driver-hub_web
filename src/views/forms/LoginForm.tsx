@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import BaseInput from "../../components/inputs/BaseInput";
-import BaseButton from "../../components/buttons/BaseButton";
+import LoginButton from "../../components/buttons/LoginButton";
 import { emailValidate } from "@/util/helpers";
 import { useRouter } from "next/navigation";
 
@@ -65,7 +65,7 @@ const LoginForm = () => {
         Forgot Password?
       </p>
       <div>
-        <BaseButton handleSubmit={handleSubmitForm} />
+        <LoginButton handleSubmit={handleSubmitForm} />
       </div>
     </form>
   );

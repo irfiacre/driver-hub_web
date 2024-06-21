@@ -53,7 +53,7 @@ export const Sidebar = () => {
     <div className="px-6 py-9 border border-r-sidebarBorderColor h-lvh flex flex-col gap-6">
       <div>
         <LogoComponent small />
-        <div>
+        <div className="p-3.5">
           <SearchableInput
             inputID="sidebarSearch"
             value={searchText}

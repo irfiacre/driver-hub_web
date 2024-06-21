@@ -5,6 +5,7 @@ interface InputProps {
   value: string;
   onInputChange: (e: any) => void;
   inputClassName?: string;
+  placeholder?: string;
 }
 
 const SearchableInput = ({
@@ -12,9 +13,10 @@ const SearchableInput = ({
   value,
   onInputChange,
   inputClassName,
+  placeholder,
 }: InputProps) => {
   return (
-    <div className="p-3.5">
+    <div>
       <label
         htmlFor={inputID}
         className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -26,7 +28,7 @@ const SearchableInput = ({
           type="search"
           id={inputID}
           className={`block w-full p-4 ps-10 h-12 bg-backgroundColor border border-borderColorLight focus:bg-backgroundColor2 focus:border-borderColorLight text-md focus:outline-none ${inputClassName}`}
-          placeholder="Search..."
+          placeholder={placeholder || "Search..."}
           value={value}
           onChange={onInputChange}
         />

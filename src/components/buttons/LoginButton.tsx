@@ -1,6 +1,6 @@
 import React from "react";
 
-const BaseButton = ({ handleSubmit }: { handleSubmit: (e: any) => void }) => {
+const LoginButton = ({ handleSubmit }: { handleSubmit: (e: any) => void }) => {
   return (
     <div className="p-3.5">
       <button
@@ -14,4 +14,4 @@ const BaseButton = ({ handleSubmit }: { handleSubmit: (e: any) => void }) => {
   );
 };
 
-export default BaseButton;
+export default LoginButton;
