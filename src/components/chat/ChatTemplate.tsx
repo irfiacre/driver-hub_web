@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import BaseInput from "../inputs/BaseInput";
+import Image from "next/image";
+import Chat from "@/app/chats/page";
+import ChatInput from "../inputs/ChatInput";
 
 interface ChatTemplateProps {
   photoUrl: string;
@@ -24,20 +27,34 @@ const ChatTemplate = ({
 
   return (
     <div>
-      <div>
-        <p>{photoUrl}</p>
-        <p> {name}</p>
+      <div className=" py-3.5 flex flex-row justify-start items-center gap-5">
+        <div>
+          <Image
+            className="rounded-full w-16 bg-textLightColor border border-borderColorLight"
+            loader={() => photoUrl}
+            src={photoUrl}
+            alt="Applicant photo"
+            height={100}
+            width={100}
+            unoptimized
+          />
+        </div>
+        <div>
+          <p className="text-textLightColor text-lg font-medium">{name}</p>
+          <p className="text-sm text-textLightColor font-extralight">
+            <span className="absolute mt-1 w-3.5 h-3.5 bg-successGreen rounded-full"></span>
+            <span className="ml-5">Online</span>
+          </p>
+        </div>
       </div>
       <hr />
       <div className="py-1.5">{children}</div>
       <hr />
-      <div>
-        <BaseInput
-          label="Password"
+      <div className="py-1.5">
+        <ChatInput
           value={message}
-          error={null}
-          placeholder="Password"
           onInputChange={handleInputChange}
+          onIconClick={() => console.log("Send Message")}
         />
       </div>
     </div>

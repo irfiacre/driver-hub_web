@@ -1,11 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import BaseCard from "../components/cards/BaseCard";
 import ChatPartner from "../components/chat/ChatPartner";
 import ChatTemplate from "../components/chat/ChatTemplate";
 
 const ChatPage = ({ applicants }: { applicants: Array<any> }) => {
-  const handleClickChartPartner = (partner: any) => {};
+  const [selectedChatPartner, setSelectedChatPartner] = useState(applicants[0]);
+
+  const handleClickChartPartner = (partner: any) => {
+    setSelectedChatPartner(partner);
+  };
   return (
     <div className="w-full px-10 py-10 flex flex-row max-md:flex-col gap-2 text-textDarkColor">
       <div className="w-3/4">
@@ -29,8 +33,8 @@ const ChatPage = ({ applicants }: { applicants: Array<any> }) => {
 
       <BaseCard className="w-full px-10 py-5">
         <ChatTemplate
-          photoUrl={"xxxx"}
-          name={"xxxx"}
+          photoUrl={selectedChatPartner.photoUrl}
+          name={selectedChatPartner.name}
           handleSendMessage={() => console.log("mmmmmm")}
         >
           <span>Message Area</span>
