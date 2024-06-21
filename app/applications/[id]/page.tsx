@@ -1,10 +1,13 @@
 "use client";
+import { COURSES_ARRAY } from "@/constants/fixtures";
+import Course from "@/src/components/Course";
 import PillComponent from "@/src/components/PillComponent";
 import BaseCard from "@/src/components/cards/BaseCard";
+import IconInput from "@/src/components/inputs/IconInput";
 import BaseModel from "@/src/components/models/BaseModel";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface DocumentProps {
   name: string;
@@ -45,17 +48,27 @@ const Application = () => {
       },
     ],
     onboardingPlan: [
-      { title: "Introduction", duration: 140 },
-      { title: "[HowTo] - Driver Tool Kit", duration: 100 },
-      { title: "Road Safety", duration: 90 },
+      { title: "Introduction", duration: 1 },
+      { title: "[HowTo] - Driver Tool Kit", duration: 1.5 },
+      { title: "Road Safety", duration: 0.5 },
     ],
   };
   const [selectedDocument, setSelectedDocument] =
     useState<DocumentProps | null>(null);
+  const [searchedCourse, setSearchedCourse] = useState<string>("");
+
+  useEffect(() => {
+    // To Update searched course
+  }, [searchedCourse]);
+  const handleInputChange = (e: any) => {
+    e.preventDefault();
+    setSearchedCourse(e.target.value);
+  };
+  const handleIconClick = () => {};
 
   return (
-    <BaseCard className="px-10 py-5 flex flex-row divide-x-1">
-      <div>
+    <BaseCard className="px-10 py-5 flex md:flex-row sm:flex-col divide-x-2">
+      <div className="w-full">
         <Image
           className="rounded-xl cursor-pointer w-52 bg-textLightColor"
           loader={() => application.applicant.photoUrl}
@@ -105,15 +118,42 @@ const Application = () => {
           ))}
         </div>
       </div>
-      <div>
-        <h1>Trainings</h1>
+      <div className="w-full px-10">
+        <h1 className="text-xl font-semibold text-textLightColor pb-5">
+          Trainings
+        </h1>
         <div>
           {application.onboardingPlan.map((plan) => (
             <div key={plan.title}>
-              <h3>{plan.title}</h3>
-              <span className="text-primary">{plan.duration} hours</span>
+              <Course title={plan.title} duration={plan.duration} />
+              <hr />
             </div>
           ))}
+          <div className="py-1.5">
+            <IconInput
+              inputID="course"
+              value={searchedCourse}
+              onInputChange={handleInputChange}
+              onIconClick={handleIconClick}
+              inputClassName="rounded-lg"
+            />
+            <div className="p-1.5">
+              <BaseCard>
+                {COURSES_ARRAY.map((course, index) => (
+                  <div key={course.id}>
+                    <div
+                      className={`px-1.5 cursor-pointer hover:bg-primary/25 ${
+                        index === 0 && "rounded-t-lg"
+                      }`}
+                    >
+                      <Course title={course.title} duration={course.duration} />
+                    </div>
+                    <hr />
+                  </div>
+                ))}
+              </BaseCard>
+            </div>
+          </div>
         </div>
       </div>
     </BaseCard>
