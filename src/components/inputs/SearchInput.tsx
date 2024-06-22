@@ -27,7 +27,7 @@ const SearchableInput = ({
         <input
           type="search"
           id={inputID}
-          className={`block w-full p-4 ps-10 h-12 bg-backgroundColor border border-borderColorLight focus:bg-backgroundColor2 focus:border-borderColorLight text-md focus:outline-none ${inputClassName}`}
+          className={`block w-full p-4 ps-10 h-12 bg-backgroundColor border border-borderColorLight focus:bg-white focus:border-borderColorLight text-md focus:outline-none ${inputClassName}`}
           placeholder={placeholder || "Search..."}
           value={value}
           onChange={onInputChange}

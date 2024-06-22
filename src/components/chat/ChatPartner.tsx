@@ -10,9 +10,9 @@ interface ChatPartnerProps {
 
 const ChatPartner = ({ photoUrl, name, lastMessage }: ChatPartnerProps) => {
   return (
-    <div className="cursor-pointer flex flex-row items-center justify-evenly hover:bg-primary/5 py-2.5">
+    <div className="cursor-pointer flex flex-row items-center gap-2 justify-evenly hover:bg-primary/5 py-2.5">
       <Image
-        className="rounded-full w-16 bg-textLightColor"
+        className="rounded-full w-12 h-12 bg-textLightColor"
         loader={() => photoUrl}
         src={photoUrl}
         alt="Applicant photo"
@@ -21,8 +21,8 @@ const ChatPartner = ({ photoUrl, name, lastMessage }: ChatPartnerProps) => {
         unoptimized
       />
       <div>
-        <p className="text-textLightColor text-lg font-medium">{name}</p>
-        <p className="text-sm font-light text-wrap">
+        <p className="text-textDarkColor/80 text-base font-medium">{name}</p>
+        <p className="text-sm font-light text-textLightColor text-wrap">
           {lastMessage.substring(0, 20)} <br /> {lastMessage.substring(20, 30)}
           ...
         </p>

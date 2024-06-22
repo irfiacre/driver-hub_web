@@ -54,7 +54,7 @@ const ChatTemplate = ({
         <ChatInput
           value={message}
           onInputChange={handleInputChange}
-          onIconClick={() => console.log("Send Message")}
+          handleSendMessage={() => handleSendMessage(message)}
         />
       </div>
     </div>
