@@ -68,6 +68,7 @@ export const generateApplicant = () => ({
   name: `YEGO Applicant - ${Math.round(Math.random() * 1000)}`,
   role: "driver",
   id: `${Math.round(Math.random() * 1000)}-driver`,
+  progress: Math.round(Math.random() * 100),
 });
 
 export const ONBOARDING_PLANS = [
