@@ -7,6 +7,7 @@ interface InputProps {
   placeholder?: string;
   required?: boolean;
   onInputChange: (e: any) => void;
+  disabled?: boolean;
 }
 
 const BaseInput = ({
@@ -16,6 +17,7 @@ const BaseInput = ({
   required,
   placeholder,
   onInputChange,
+  disabled,
 }: InputProps) => {
   const inputID = label ? label.split(" ").join("_").toLowerCase() : "no_label";
   const inputType = inputID.includes("email")
@@ -39,12 +41,13 @@ const BaseInput = ({
         className={`block w-full p-2 h-14 ${
           error
             ? "bg-red-50 border border-red-500 text-red-900"
-            : "bg-backgroundColor border border-borderColorLight focus:bg-backgroundColor2 focus:border-borderColorLight"
-        } text-md rounded-md  focus:outline-none`}
+            : "bg-backgroundColor border border-borderColorLight focus:bg-white focus:border-borderColorLight"
+        } text-md rounded-md  focus:outline-none disabled:bg-backgroundColor2`}
         placeholder={`Enter ${placeholder || ""}`}
         required={required || true}
         value={value}
         onChange={onInputChange}
+        disabled={disabled}
       />
       {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
     </div>

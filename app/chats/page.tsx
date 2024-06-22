@@ -1,5 +1,5 @@
-import { APPLICANT, generateApplicant } from "@/constants/fixtures";
-import ChatPage from "@/src/pages/ChatPage";
+import { generateApplicant } from "@/constants/fixtures";
+import ChatPage from "@/src/views/pages/chats/ChatPage";
 import React from "react";
 
 const Chat = () => {

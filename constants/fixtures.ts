@@ -69,3 +69,54 @@ export const generateApplicant = () => ({
   role: "driver",
   id: `${Math.round(Math.random() * 1000)}-driver`,
 });
+
+export const ONBOARDING_PLANS = [
+  {
+    title: "Training on how to use driver tool Kit",
+    courses: 5,
+    description:
+      "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+    createdAt: new Date(),
+  },
+  {
+    title: "Driver safety (Refresher)",
+    courses: 4,
+    description:
+      "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+    createdAt: new Date(),
+  },
+  {
+    title: "Initial Training",
+    courses: 3,
+    description:
+      "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+    createdAt: new Date(),
+  },
+  {
+    title: "Driver safety (Refresher)",
+    courses: 15,
+    description:
+      "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+    createdAt: new Date(),
+  },
+  {
+    title: "Driver safety (Refresher)",
+    courses: 4,
+    description:
+      "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+    createdAt: new Date(),
+  },
+];
+
+export const ONBOARDING_PLAN_DETAILS = {
+  title: "Training on how to use driver tool Kit",
+  description:
+    "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+  createdAt: new Date(),
+  students: 450,
+  courses: [
+    { title: "Introduction", duration: 1, id: "xxxx1" },
+    { title: "Welcome to Yego", duration: 1.5, id: "xxxx2" },
+    { title: "Road Safety", duration: 0.5, id: "xxxx3" },
+  ],
+};

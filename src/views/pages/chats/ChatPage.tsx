@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import BaseCard from "../components/cards/BaseCard";
-import ChatPartner from "../components/chat/ChatPartner";
-import ChatTemplate from "../components/chat/ChatTemplate";
-import ChatBubble from "../components/chat/ChatBubble";
+import BaseCard from "../../../components/cards/BaseCard";
+import ChatPartner from "../../../components/chat/ChatPartner";
+import ChatTemplate from "../../../components/chat/ChatTemplate";
+import ChatBubble from "../../../components/chat/ChatBubble";
 
 const ChatPage = ({ applicants }: { applicants: Array<any> }) => {
   const [selectedChatPartner, setSelectedChatPartner] = useState(applicants[0]);

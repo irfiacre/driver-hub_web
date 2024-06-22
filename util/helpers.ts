@@ -1,4 +1,4 @@
-// import { Poppins } from "next/font/google";
+import moment from "moment";
 
 export const emailValidate = (email: string) => {
   if (!email) return "No Email Provided!";
@@ -11,12 +11,7 @@ export const emailValidate = (email: string) => {
   }
 };
 
-// export const changeTextWeight = (fontWeight: string): string => {
-//   const weight = fontWeight ? fontWeight : "100";
-//   const poppins = Poppins({
-//     subsets: ["latin"],
-//     weight: `${fontWeight}`,
-//   });
-
-//   return poppins.className;
-// };
+export const formatDate = (date: Date, format?: string): string => {
+  const formatToUse = format ? format : "MMM Do YY";
+  return moment(date).format(formatToUse);
+};
