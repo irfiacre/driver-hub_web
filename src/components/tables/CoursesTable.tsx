@@ -8,7 +8,7 @@ import BaseModel from "../models/BaseModel";
 import CreateOnboardingPlan from "@/src/views/forms/CreateOnboardingPlan";
 import { Icon } from "@iconify/react";
 
-const OnboardingPlansTable = ({ data }: { data: Array<any> }) => {
+const CoursesTable = ({ data }: { data: Array<any> }) => {
   const [searchText, setSearchText] = useState("");
   const [tableData, updateTableData] = useState(data);
   const [openModel, setOnboardingPlan] = useState<boolean>(false);
@@ -83,18 +83,11 @@ const OnboardingPlansTable = ({ data }: { data: Array<any> }) => {
       )}
       <div className="py-5 text-textLightColor text-base font-semibold flex flex-row justify-between items-center">
         <span>Total = {data.length}</span>
-        <button
-          type="button"
-          onClick={() => handleCreatePlan("create")}
-          className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4"
-        >
-          Create New
-        </button>
       </div>
       <div className="py-2.5 text-textLightColor text-base font-semibold flex flex-row align-middle items-center px-1.5 gap-3.5 cursor-pointer bg-backgroundColor">
         <span className="w-full">Title</span>
-        <span className="w-2/4">Courses</span>
         <span className="w-full">Description</span>
+        <span className="w-2/4">Materials</span>
         <span className="w-2/4">Actions</span>
       </div>
       <hr />
@@ -107,16 +100,16 @@ const OnboardingPlansTable = ({ data }: { data: Array<any> }) => {
                   <span>{item.title}</span>
                 </Link>
               </div>
-              <div className="w-2/4">
-                <Link href={`/plans/${index + 1}`}>
-                  <span>{item.courses}</span>
-                </Link>
-              </div>
               <div className="text-sm w-full">
                 <Link href={`/plans/${index + 1}`}>
                   <span className="text-textLightColor font-light">
                     {item.description.substring(0, 50)}
                   </span>
+                </Link>
+              </div>
+              <div className="w-2/4">
+                <Link href={`/plans/${index + 1}`}>
+                  <span>{item.courses}</span>
                 </Link>
               </div>
               <div className="w-2/4">
@@ -147,4 +140,4 @@ const OnboardingPlansTable = ({ data }: { data: Array<any> }) => {
   );
 };
 
-export default OnboardingPlansTable;
+export default CoursesTable;

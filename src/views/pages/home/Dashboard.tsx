@@ -30,9 +30,9 @@ const DashboardPage = () => {
   ];
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex flex-row flex-wrap justify-between items-center gap-1.5 py-1.5">
+      <div className="flex flex-row flex-wrap justify-between max-md:justify-start items-center gap-1.5 py-1.5">
         {analytics.map((item) => (
-          <div className="w-60 h-36 py-1.5" key={item.title}>
+          <div className="w-60 py-1.5 max-sm:w-32" key={item.title}>
             <AnalyticsCard title={item.title} count={item.count} />
           </div>
         ))}
@@ -40,26 +40,22 @@ const DashboardPage = () => {
       {/* <div>
         <Chart title="Weekly Onboarding hours" />
       </div> */}
-      <div className="flex flex-row justify-between gap-5">
-        <BaseCard className="px-10 py-5">
-          <div className="flex flex-row justify-between p-1.5 mb-5">
-            <h1 className="text-xl">More statistics</h1>
-            <span className="text-textLightColor font-light">Just Now</span>
-          </div>
-          {moreStatistics.map((item) => (
-            <div key={item.title}>
-              <div className="flex flex-row justify-between p-1.5">
-                <h1 className="font-medium">{item.title}</h1>
-                <span className="text-textLightColor">{item.count}</span>
-              </div>
-              <hr />
+
+      <BaseCard className="px-10 py-5">
+        <div className="flex flex-row justify-between p-1.5 mb-5">
+          <h1 className="text-xl">More statistics</h1>
+          <span className="text-textLightColor font-light">Just Now</span>
+        </div>
+        {moreStatistics.map((item) => (
+          <div key={item.title}>
+            <div className="flex flex-row justify-between p-1.5">
+              <h1 className="font-medium">{item.title}</h1>
+              <span className="text-textLightColor">{item.count}</span>
             </div>
-          ))}
-        </BaseCard>
-        <BaseCard className="w-3/4">
-          <h1>Feedback and reviews</h1>
-        </BaseCard>
-      </div>
+            <hr />
+          </div>
+        ))}
+      </BaseCard>
     </div>
   );
 };

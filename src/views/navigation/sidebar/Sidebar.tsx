@@ -3,6 +3,8 @@ import SearchableInput from "@/src/components/inputs/SearchInput";
 import LogoComponent from "@/src/components/logo/LogoComponent";
 import React, { useState } from "react";
 import MenuSection, { MenuItem } from "./MenuSection";
+import Link from "next/link";
+import { Icon } from "@iconify/react";
 
 export const Sidebar = () => {
   const sidebarMenu = {
@@ -75,7 +77,18 @@ export const Sidebar = () => {
         <MenuSection title="Onboarding" menuItems={sidebarMenu.onboarding} />
       </div>
       <div className="py-6 ml-4">
-        <p className="text-textLightColor text-xl">Courses</p>
+        <Link
+          href="/courses"
+          scroll={false}
+          className="flex items-center text-textLightColor text-xl cursor-pointer hover:underline"
+        >
+          <p>Courses</p>
+          <Icon
+            icon="mingcute:right-fill"
+            fontSize={24}
+            className="pt-1 -ml-1"
+          />
+        </Link>
       </div>
     </div>
   );

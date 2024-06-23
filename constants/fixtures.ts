@@ -56,6 +56,12 @@ export const ADMIN = {
   role: "admin",
 };
 
+export const LECTURE = {
+  photoUrl: "https://i.pravatar.cc",
+  name: "YEGO Lecture",
+  role: "lecture",
+};
+
 export const APPLICANT = {
   photoUrl: "https://i.pravatar.cc",
   name: `YEGO Applicant - ${Math.round(Math.random() * 1000)}`,
