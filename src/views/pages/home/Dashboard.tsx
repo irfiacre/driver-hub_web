@@ -49,7 +49,7 @@ const DashboardPage = () => {
           {moreStatistics.map((item) => (
             <div key={item.title}>
               <div className="flex flex-row justify-between p-1.5">
-                <h1 className="font-light">{item.title}</h1>
+                <h1 className="font-medium">{item.title}</h1>
                 <span className="text-textLightColor">{item.count}</span>
               </div>
               <hr />

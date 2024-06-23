@@ -1,5 +1,5 @@
-import { Icon } from "@iconify/react";
 import React from "react";
+import { Icon } from "@iconify/react";
 
 interface InputProps {
   value: string;

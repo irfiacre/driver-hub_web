@@ -121,3 +121,19 @@ export const ONBOARDING_PLAN_DETAILS = {
     { title: "Road Safety", duration: 0.5, id: "xxxx3" },
   ],
 };
+
+export const APPLICANT_COURSES = [
+  { title: "Introduction", duration: 1, id: "xxxx1", progress: 100 },
+  {
+    title: "Welcome to Yego",
+    duration: 1.5,
+    id: "xxxx2",
+    progress: 50,
+  },
+  {
+    title: "Road Safety",
+    duration: 0.5,
+    id: "xxxx3",
+    progress: 1,
+  },
+];

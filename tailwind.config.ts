@@ -26,6 +26,7 @@ const config: Config = {
         notificationIconColor: "#AAACBD",
         successGreen: "#00BF63",
         modalBackground: "#911259",
+        progressBarBackgroundColor: "#F4F3FD",
       },
     },
   },
