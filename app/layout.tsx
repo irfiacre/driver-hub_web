@@ -17,10 +17,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = {
-    photoUrl: "https://i.pravatar.cc",
-    name: "Lego Admin",
-  };
+  const user = null;
+  // {
+  //   photoUrl: "https://i.pravatar.cc",
+  //   name: "Lego Admin",
+  // };
   const [isActive, showSidebar] = useState(false);
   return (
     <html lang="en">

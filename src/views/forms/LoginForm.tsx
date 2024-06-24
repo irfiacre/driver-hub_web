@@ -11,7 +11,13 @@ interface LoginFormState {
   error?: string | null;
 }
 
-const LoginForm = () => {
+const LoginForm = ({
+  handleLoginBtn,
+  loading,
+}: {
+  handleLoginBtn: (email: string, password: string) => void;
+  loading: boolean;
+}) => {
   const [state, setState] = useState<LoginFormState>({
     email: "",
     password: "",
@@ -29,7 +35,6 @@ const LoginForm = () => {
   };
   const handleSubmitForm = (e: any) => {
     e.preventDefault();
-
     const emailValidation = emailValidate(state.email);
     if (emailValidation !== state.email) {
       setState((prevState: any) => ({
@@ -39,9 +44,7 @@ const LoginForm = () => {
       return;
     }
     const { email, password } = state;
-    console.log("--------", email, password);
-
-    router.replace("/dashboard", { scroll: false });
+    handleLoginBtn(email, password);
   };
   return (
     <form className="w-3/4">
@@ -65,7 +68,7 @@ const LoginForm = () => {
         Forgot Password?
       </p>
       <div>
-        <LoginButton handleSubmit={handleSubmitForm} />
+        <LoginButton handleSubmit={handleSubmitForm} loading={loading} />
       </div>
     </form>
   );
