@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import { ONBOARDING_PLANS } from "@/constants/fixtures";
 import CoursesTable from "@/src/components/tables/CoursesTable";
+import isAuth from "@/src/components/isAuth";
 
 const Courses = () => {
   const applicationsData = ONBOARDING_PLANS;
@@ -11,4 +13,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default isAuth(Courses);

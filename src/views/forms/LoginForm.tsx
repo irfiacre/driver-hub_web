@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import BaseInput from "../../components/inputs/BaseInput";
 import LoginButton from "../../components/buttons/LoginButton";
 import { emailValidate } from "@/util/helpers";
-import { useRouter } from "next/navigation";
 
 interface LoginFormState {
   email: string;
@@ -23,7 +22,6 @@ const LoginForm = ({
     password: "",
     error: null,
   });
-  const router = useRouter();
 
   const handleInputChange = (e: any) => {
     e.preventDefault();

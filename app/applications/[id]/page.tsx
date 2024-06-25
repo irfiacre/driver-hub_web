@@ -8,6 +8,7 @@ import Course from "@/src/components/Course";
 import PillComponent from "@/src/components/PillComponent";
 import BaseCard from "@/src/components/cards/BaseCard";
 import SearchableInput from "@/src/components/inputs/SearchInput";
+import isAuth from "@/src/components/isAuth";
 import BaseModel from "@/src/components/models/BaseModel";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -215,4 +216,4 @@ const Application = () => {
   );
 };
 
-export default Application;
+export default isAuth(Application);

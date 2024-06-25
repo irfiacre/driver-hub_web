@@ -1,4 +1,6 @@
+"use client";
 import { ONBOARDING_PLANS } from "@/constants/fixtures";
+import isAuth from "@/src/components/isAuth";
 import OnboardingPlansTable from "@/src/components/tables/OnboardingPlansTable";
 import React from "react";
 
@@ -11,4 +13,4 @@ const OnboardingPlans = () => {
   );
 };
 
-export default OnboardingPlans;
+export default isAuth(OnboardingPlans);

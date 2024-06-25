@@ -5,7 +5,7 @@ import "./globals.css";
 import { primaryColorBg } from "@/constants/colors";
 import { Sidebar } from "@/src/views/navigation/sidebar/Sidebar";
 import TopNav from "@/src/views/navigation/topNavbar/TopNav";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,11 +17,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = null;
-  // {
-  //   photoUrl: "https://i.pravatar.cc",
-  //   name: "Lego Admin",
-  // };
+  let user = null;
+
+  useEffect(() => {
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      user = JSON.parse(userStr);
+      console.log("=========", user);
+    }
+  }, []);
+
   const [isActive, showSidebar] = useState(false);
   return (
     <html lang="en">

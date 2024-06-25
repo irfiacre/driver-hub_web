@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
 import SearchableTable from "@/src/components/tables/SearchableTable";
+import isAuth from "@/src/components/isAuth";
 
 const Applications = () => {
   const applicationsData = [
@@ -53,4 +55,4 @@ const Applications = () => {
   );
 };
 
-export default Applications;
+export default isAuth(Applications);

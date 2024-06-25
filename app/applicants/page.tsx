@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import { generateApplicant } from "@/constants/fixtures";
 import ApplicantsPage from "@/src/views/pages/ApplicantsPage";
+import isAuth from "@/src/components/isAuth";
 
 const Applicants = () => {
   const applicants = [];
@@ -14,4 +16,4 @@ const Applicants = () => {
   );
 };
 
-export default Applicants;
+export default isAuth(Applicants);

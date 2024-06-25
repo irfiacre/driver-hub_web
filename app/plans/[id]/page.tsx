@@ -10,8 +10,9 @@ import BaseCard from "@/src/components/cards/BaseCard";
 import SearchableInput from "@/src/components/inputs/SearchInput";
 import { Icon } from "@iconify/react";
 import { formatDate } from "@/util/helpers";
-import Chart from "@/src/components/charts/Chart";
-import LineChart from "@/src/components/charts/LineChart";
+import isAuth from "@/src/components/isAuth";
+// import Chart from "@/src/components/charts/Chart";
+// import LineChart from "@/src/components/charts/LineChart";
 
 const OnboardingPlan = () => {
   const plan = ONBOARDING_PLAN_DETAILS;
@@ -141,4 +142,4 @@ const OnboardingPlan = () => {
   );
 };
 
-export default OnboardingPlan;
+export default isAuth(OnboardingPlan);

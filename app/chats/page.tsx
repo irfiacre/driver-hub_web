@@ -1,4 +1,6 @@
+"use client";
 import { generateApplicant } from "@/constants/fixtures";
+import isAuth from "@/src/components/isAuth";
 import ChatPage from "@/src/views/pages/chats/ChatPage";
 import React from "react";
 
@@ -14,4 +16,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default isAuth(Chat);

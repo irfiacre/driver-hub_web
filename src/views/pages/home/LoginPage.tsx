@@ -1,17 +1,36 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginForm from "@/src/views/forms/LoginForm";
 import LogoComponent from "@/src/components/logo/LogoComponent";
 import { signExistingUser } from "@/services/firebase/authentication";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      console.log("------------------- Saving user to Local storage:");
+      localStorage.setItem("user", JSON.stringify(user));
+      router.push("/applications");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
   const handleLoginBtn = async (email: string, password: string) => {
     setLoading(true);
-    const user = await signExistingUser(email, password);
+    const user: any = await signExistingUser(email, password);
+    console.log(user);
+
     if (user) {
       setLoading(false);
-      console.log(user);
+      setUser({
+        photoUrl: user.photoURL,
+        name: user.photoURL,
+        role: user.role ? user.role : "",
+      });
     }
   };
   return (
