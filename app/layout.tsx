@@ -17,13 +17,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let user = null;
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const userStr = localStorage.getItem("user");
     if (userStr) {
-      user = JSON.parse(userStr);
-      console.log("=========", user);
+      setUser(JSON.parse(userStr));
     }
   }, []);
 

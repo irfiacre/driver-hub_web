@@ -1,14 +1,15 @@
 "use client";
 import { redirect } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function isAuth(Component: any) {
   return function IsAuth(props: any) {
-    let user: string | null = null;
+    const [user, setUser] = useState(null);
     useEffect(() => {
-      const userStr: string | null = localStorage.getItem("user");
-      user = JSON.parse(userStr);
-      if (!user) {
+      const userStr: any = localStorage.getItem("user");
+      if (userStr) {
+        setUser(JSON.parse(userStr));
+      } else {
         return redirect("/");
       }
     }, []);
