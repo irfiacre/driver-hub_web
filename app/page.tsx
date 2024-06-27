@@ -1,7 +1,7 @@
 "use client";
 import LoginPage from "@/src/views/pages/home/LoginPage";
 import DashboardPage from "@/src/views/pages/home/Dashboard";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 import { useEffect, useState } from "react";
 
 // export const metadata: Metadata = {

@@ -12,7 +12,6 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      console.log("------------------- Saving user to Local storage:");
       localStorage.setItem("user", JSON.stringify(user));
       router.push("/applications");
     }
@@ -28,7 +27,7 @@ const LoginPage = () => {
       setLoading(false);
       setUser({
         photoUrl: user.photoURL,
-        name: user.photoURL,
+        name: user.displayName,
         role: user.role ? user.role : "",
       });
     }

@@ -25,15 +25,6 @@ export const signExistingUser = async (email: string, password: string) => {
       password
     );
     const user = userCredential.user;
-    await updateProfile(auth.currentUser, {
-      displayName: "Busy Dev",
-      photoURL:
-        "https://lh3.googleusercontent.com/a/ACg8ocLKgZxt5l26aaeNrKpoF6HF0KXRl-sZYEPlJOoOhtnLLcQP6kM=s288-c-no",
-      firstName: "Busy",
-      lastName: "Dev",
-      createdAt: new Date(),
-      role: "admin",
-    });
     return user;
   } catch (error: any) {
     console.error(`Error getting Signing In User: `, error);
