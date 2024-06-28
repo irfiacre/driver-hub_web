@@ -33,7 +33,7 @@ const DashboardPage = () => {
   const fetchStaff = async () => await getAllStaff();
 
   const [allStaff, setStaff] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const userStr = localStorage.getItem("user");
