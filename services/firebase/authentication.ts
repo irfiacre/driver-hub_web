@@ -62,29 +62,15 @@ export const signExistingUser = async (email: string, password: string) => {
   }
 };
 
-export const addUser = async ({
-  firstName,
-  lastName,
-  email,
-  password,
-  role,
-}: UserObject) => {
+export const addUser = async (email: string, password: string) => {
   try {
-    const additionalUserInformation = {
-      displayName: `${firstName} ${lastName}`,
-      photoUrl: "",
-      firstName,
-      lastName,
-      createdAt: new Date(),
-      role,
-    };
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
     const user = userCredential.user;
-    await updateProfile(auth.currentUser, additionalUserInformation);
+
     return user;
   } catch (error: any) {
     console.error(`Error getting Adding User: `, error);

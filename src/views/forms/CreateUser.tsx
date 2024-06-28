@@ -11,11 +11,8 @@ interface CreateUserState {
 }
 
 const CreateUser = ({
-  defaultTitle,
-  defaultDescription,
   onFormSubmit,
 }: {
-  defaultTitle?: string;
   defaultDescription?: string;
   onFormSubmit: (obj: CreateUserState) => void;
 }) => {
@@ -50,7 +47,6 @@ const CreateUser = ({
               value={state.first_name}
               placeholder="First Name"
               onInputChange={handleInputChange}
-              disabled={!!defaultTitle}
             />
           </div>
           <div className="w-full">
@@ -59,7 +55,6 @@ const CreateUser = ({
               value={state.last_name}
               placeholder="Last Name"
               onInputChange={handleInputChange}
-              disabled={!!defaultTitle}
             />
           </div>
         </div>
@@ -70,7 +65,6 @@ const CreateUser = ({
               value={state.email}
               placeholder="Email"
               onInputChange={handleInputChange}
-              disabled={!!defaultTitle}
             />
           </div>
 
@@ -97,7 +91,6 @@ const CreateUser = ({
           value={state.cooperative}
           placeholder="Cooperative (Optional)"
           onInputChange={handleInputChange}
-          disabled={!!defaultTitle}
         />
       </div>
       <div className="p-3.5">

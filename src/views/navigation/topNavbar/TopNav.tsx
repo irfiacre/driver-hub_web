@@ -1,4 +1,5 @@
 "use client";
+import { PLACEHOLDER_IMG } from "@/constants/fixtures";
 import { signOutUser } from "@/services/firebase/authentication";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
@@ -12,7 +13,7 @@ const TopNav = ({ user, title }: { user: any; title: string }) => {
   const handleLogout = async () => {
     localStorage.removeItem("user");
     await signOutUser();
-    router.push("/");
+    router.replace("/");
   };
   return (
     <div className="flex flex-row justify-between">
@@ -31,7 +32,7 @@ const TopNav = ({ user, title }: { user: any; title: string }) => {
               <Image
                 className="rounded-full cursor-pointer hover:border hover:border-borderColorLight"
                 loader={() => user.photoUrl}
-                src={user.photoUrl}
+                src={user.photoUrl ? user.photoUrl : PLACEHOLDER_IMG}
                 alt="Rounded avatar"
                 height={40}
                 width={40}
@@ -59,7 +60,7 @@ const TopNav = ({ user, title }: { user: any; title: string }) => {
                 </Link>
                 <button
                   type="button"
-                  className="block w-full px-4 py-2 text-left text-sm text-gray-700"
+                  className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-backgroundColor2"
                   role="menuitem"
                   tabIndex={-1}
                   id="menu-item-3"

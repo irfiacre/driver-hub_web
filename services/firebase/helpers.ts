@@ -1,4 +1,11 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { database } from "./authentication";
 
 export const findDocEntryByField = async (
@@ -23,4 +30,14 @@ export const findDocEntryByField = async (
     throw error;
   }
   return result[0];
+};
+
+export const createDocEntry = async (collectionName: string, docObj: any) => {
+  try {
+    const docRef = doc(database, collectionName, docObj.id);
+    await setDoc(docRef, docObj);
+    return true;
+  } catch (e) {
+    return false;
+  }
 };

@@ -143,3 +143,12 @@ export const APPLICANT_COURSES = [
     progress: 1,
   },
 ];
+
+export const USER_DOC_ID = `STAFF-${Math.round(Math.random() * 100)}`;
+export const DEFAULT_PASSWORD = "officer123";
+
+export const MAIL_APP_PSWRD = "aekyakvlfumtpcvh";
+export const SENDER_EMAIL = "driverhub.rw@gmail.com";
+
+export const PLACEHOLDER_IMG =
+  "https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png";

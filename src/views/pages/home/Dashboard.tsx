@@ -33,8 +33,17 @@ const DashboardPage = () => {
   const fetchStaff = async () => await getAllStaff();
 
   const [allStaff, setStaff] = useState([]);
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
-    fetchStaff().then((result: any) => setStaff(result));
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      const userObj = JSON.parse(userStr);
+      if (userObj.role === "admin") {
+        fetchStaff().then((result: any) => setStaff(result));
+      }
+      setUser(userObj);
+    }
   }, []);
 
   return (
@@ -65,7 +74,7 @@ const DashboardPage = () => {
           </div>
         ))}
       </BaseCard>
-      <UsersTable data={allStaff} />
+      {user?.role === "admin" && <UsersTable data={allStaff} />}
     </div>
   );
 };

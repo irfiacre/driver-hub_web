@@ -5,6 +5,8 @@ import { primaryColorBg } from "@/constants/colors";
 import { Sidebar } from "@/src/views/navigation/sidebar/Sidebar";
 import TopNav from "@/src/views/navigation/topNavbar/TopNav";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -69,6 +71,7 @@ export default function RootLayout({
             <main className="w-full p-6 mt-8">
               <div className="">
                 <TopNav user={user} title="Overview" />
+                <ToastContainer />
               </div>
               <div>{children}</div>
             </main>

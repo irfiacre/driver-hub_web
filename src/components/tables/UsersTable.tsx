@@ -7,16 +7,46 @@ import Pagination from "./Pagination";
 import Link from "next/link";
 import CreateUser from "@/src/views/forms/CreateUser";
 import BaseModel from "../models/BaseModel";
+import { addUser } from "@/services/firebase/authentication";
+import { DEFAULT_PASSWORD, USER_DOC_ID } from "@/constants/fixtures";
+import { createDocEntry } from "@/services/firebase/helpers";
+import { STAFF_COLLECTION_NAME } from "@/constants/collectionNames";
+import { Flip, toast } from "react-toastify";
 
 const UsersTable = ({ data }: { data: Array<any> }) => {
   const [searchText, setSearchText] = useState("");
   const [tableData, updateTableData] = useState(data);
-  const [openModel, setOnboardingPlan] = useState<boolean>(true);
-  const [editValues, setEditValues] = useState({
-    title: "",
-    description: "",
-  });
+  const [openModel, setOnboardingPlan] = useState<boolean>(false);
 
+  const sendConfirmationEmail = async (email: string) => {
+    const res = await fetch("/api/sendEmail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        subject: "Welcome to Driver Hub",
+        message: `
+        <p>Warm welcome to Driver Hub platform, we are excited to have you ;)</p>
+        <div>
+        <h3>Your Credentials are:</h3>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Password:</strong> ${DEFAULT_PASSWORD}</p>
+        </div>
+        `,
+        title: "Welcome to Driver Hub",
+      }),
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   useEffect(() => {
     updateTableData(
       data.filter((item) =>
@@ -34,19 +64,37 @@ const UsersTable = ({ data }: { data: Array<any> }) => {
     setSearchText(e.target.value);
   };
 
-  const handleCloseModel = () => {
-    setOnboardingPlan(false);
-    setEditValues({
-      title: "",
-      description: "",
-    });
-  };
+  const handleCloseModel = () => setOnboardingPlan(false);
 
-  const handleCreatePlan = (obj: "create" | any) => {
+  const handleCreatePlan = async (obj: "create" | any) => {
     if (obj === "create") {
       setOnboardingPlan(true);
     } else {
-      console.log("Should submit the entered values", obj);
+      const user = await addUser(obj.email, DEFAULT_PASSWORD);
+      const staffFormat = {
+        id: USER_DOC_ID,
+        userId: user.uid,
+        firstName: obj.first_name,
+        lastName: obj.last_name,
+        role: obj.role,
+        cooperative: obj.cooperative,
+      };
+
+      const staffAdded = await createDocEntry(
+        STAFF_COLLECTION_NAME,
+        staffFormat
+      );
+
+      if (staffAdded) {
+        const result = await sendConfirmationEmail(obj.email);
+        toast.success("User Created", {
+          hideProgressBar: true,
+          closeOnClick: true,
+          transition: Flip,
+          autoClose: 3000,
+        });
+      }
+
       handleCloseModel();
     }
   };
@@ -61,18 +109,12 @@ const UsersTable = ({ data }: { data: Array<any> }) => {
       <div>
         {openModel && (
           <BaseModel
-            title={
-              editValues.title ? `Edit (${editValues.title})` : "Create Plan"
-            }
-            onClose={() => console.log("onClose")}
+            title="Add New User"
+            onClose={handleCloseModel}
             containerStyle="w-4/5 p-10"
           >
             <div className="">
-              <CreateUser
-                onFormSubmit={handleCreatePlan}
-                defaultDescription={editValues.description}
-                defaultTitle={editValues.title}
-              />
+              <CreateUser onFormSubmit={handleCreatePlan} />
             </div>
           </BaseModel>
         )}
@@ -83,15 +125,15 @@ const UsersTable = ({ data }: { data: Array<any> }) => {
             onClick={() => handleCreatePlan("create")}
             className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4"
           >
-            Create New
+            Add New User
           </button>
         </div>
       </div>
 
       <hr />
       <div>
-        {tableData.map((item, index) => (
-          <div key={item.applicant}>
+        {tableData.map((item) => (
+          <div key={`${item.firstName}-${item.lastName}`}>
             <Link href={`#`}>
               <div className="flex flex-row justify-between items-center py-2.5 px-1.5 gap-3.5 cursor-pointer hover:bg-primary_3">
                 {/*  <div className="">
@@ -132,9 +174,6 @@ const UsersTable = ({ data }: { data: Array<any> }) => {
             </Link>
           </div>
         ))}
-      </div>
-      <div className="w-full py-10">
-        <Pagination prevPage={1} currentPage={2} nextPage={3} totalPages={5} />
       </div>
     </BaseCard>
   );
