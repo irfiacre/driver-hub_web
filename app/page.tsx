@@ -18,6 +18,5 @@ export default function Home() {
       setUser(JSON.parse(userStr));
     }
   }, []);
-
   return !user ? <LoginPage /> : <DashboardPage />;
 }

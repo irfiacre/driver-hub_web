@@ -1,7 +1,9 @@
+import { getAllStaff } from "@/services/firebase/authentication";
 import AnalyticsCard from "@/src/components/cards/AnalyticsCard";
 import BaseCard from "@/src/components/cards/BaseCard";
+import UsersTable from "@/src/components/tables/UsersTable";
 // import Chart from "@/src/components/charts/Chart";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const DashboardPage = () => {
   const analytics = [
@@ -28,6 +30,13 @@ const DashboardPage = () => {
     { title: "Currently Onboarding", count: 120 },
     { title: "Available courses", count: 30 },
   ];
+  const fetchStaff = async () => await getAllStaff();
+
+  const [allStaff, setStaff] = useState([]);
+  useEffect(() => {
+    fetchStaff().then((result: any) => setStaff(result));
+  }, []);
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-row flex-wrap justify-between max-md:justify-start items-center gap-1.5 py-1.5">
@@ -56,6 +65,7 @@ const DashboardPage = () => {
           </div>
         ))}
       </BaseCard>
+      <UsersTable data={allStaff} />
     </div>
   );
 };

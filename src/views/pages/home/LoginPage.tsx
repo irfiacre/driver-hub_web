@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [loginError, setLoginError] = useState<string>("");
   const router = useRouter();
 
   useEffect(() => {
@@ -21,16 +22,12 @@ const LoginPage = () => {
   const handleLoginBtn = async (email: string, password: string) => {
     setLoading(true);
     const user: any = await signExistingUser(email, password);
-    console.log(user);
-
-    if (user) {
-      setLoading(false);
-      setUser({
-        photoUrl: user.photoURL,
-        name: user.displayName,
-        role: user.role ? user.role : "",
-      });
+    if (user.name?.includes("FirebaseError")) {
+      setLoginError("Invalid User Credentials");
+    } else if (user) {
+      setUser(user);
     }
+    setLoading(false);
   };
   return (
     <main className="flex flex-row">
@@ -47,7 +44,11 @@ const LoginPage = () => {
           </p>
         </div>
         <div className="w-full flex justify-center">
-          <LoginForm handleLoginBtn={handleLoginBtn} loading={loading} />
+          <LoginForm
+            handleLoginBtn={handleLoginBtn}
+            loading={loading}
+            loginError={loginError}
+          />
         </div>
       </div>
       <div className="max-sm:hidden w-full bg-taxiMeter h-lvh bg-cover bg-no-repeat bg-center brightness-50"></div>

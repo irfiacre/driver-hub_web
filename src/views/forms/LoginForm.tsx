@@ -13,9 +13,11 @@ interface LoginFormState {
 const LoginForm = ({
   handleLoginBtn,
   loading,
+  loginError,
 }: {
   handleLoginBtn: (email: string, password: string) => void;
   loading: boolean;
+  loginError: string;
 }) => {
   const [state, setState] = useState<LoginFormState>({
     email: "",
@@ -50,18 +52,21 @@ const LoginForm = ({
         <BaseInput
           label="Email"
           value={state.email}
-          error={state.error}
+          error={loginError ? " " : state.error}
           placeholder="Email"
           onInputChange={handleInputChange}
         />
         <BaseInput
           label="Password"
           value={state.password}
-          error={null}
+          error={loginError ? " " : null}
           placeholder="Password"
           onInputChange={handleInputChange}
         />
       </div>
+      {loginError && (
+        <p className="mt-2 text-red-500 text-center text-base">{loginError}</p>
+      )}
       <p className="py-2 text-textLightColor text-sm text-center hover:cursor-pointer hover:text-primary">
         Forgot Password?
       </p>

@@ -1,11 +1,19 @@
 "use client";
+import { signOutUser } from "@/services/firebase/authentication";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const TopNav = ({ user, title }: { user: any; title: string }) => {
   const [isActive, handleDropdown] = useState(false);
+  const router = useRouter();
+  const handleLogout = async () => {
+    localStorage.removeItem("user");
+    await signOutUser();
+    router.push("/");
+  };
   return (
     <div className="flex flex-row justify-between">
       <h1 className="text-primary text-2xl">{title}</h1>
@@ -14,7 +22,9 @@ const TopNav = ({ user, title }: { user: any; title: string }) => {
           <Icon icon="zondicons:notification" fontSize={20} />
         </div>
         <div>|</div>
-        <div>{user.name}</div>
+        <div>
+          <span>{user.firstName}</span> <span>{user.lastName}</span>
+        </div>
         <div>
           <div className="relative inline-block text-left">
             <div onClick={() => handleDropdown((prevState) => !prevState)}>
@@ -53,6 +63,7 @@ const TopNav = ({ user, title }: { user: any; title: string }) => {
                   role="menuitem"
                   tabIndex={-1}
                   id="menu-item-3"
+                  onClick={handleLogout}
                 >
                   Log out
                 </button>
