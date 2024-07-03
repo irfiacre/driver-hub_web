@@ -1,0 +1,18 @@
+.ql-toolbar.ql-snow {
+  border: 1px solid #b8b8d2;
+  background-color: #fff;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ql-container.ql-snow {
+  border: 1px solid #b8b8d2;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  max-height: 30vh;
+  overflow: auto;
+}

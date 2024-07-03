@@ -5,17 +5,19 @@ const Course = ({
   title,
   duration,
   progress,
+  hasAttachement,
 }: {
   title: String;
   duration: number;
   progress?: number;
+  hasAttachement?: boolean;
 }) => {
   const completed = progress ? progress === 100 : false;
   return (
     <div
-      className={`${progress && "flex flex-row justify-between"} p-1.5 ${
-        completed ? "text-textLightColor" : "text-textDarkColor"
-      }`}
+      className={`${
+        (progress || hasAttachement) && "flex flex-row justify-between"
+      } p-1.5 ${completed ? "text-textLightColor" : "text-textDarkColor"}`}
     >
       <div>
         <p className="text-sm">{title}</p>
@@ -33,6 +35,11 @@ const Course = ({
           ) : (
             <p>{progress}%</p>
           )}
+        </div>
+      )}
+      {hasAttachement && (
+        <div className="py-4 text-borderColorLight">
+          <Icon icon="teenyicons:attach-outline" fontSize={18} />
         </div>
       )}
     </div>

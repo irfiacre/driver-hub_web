@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import BaseInput from "../../components/inputs/BaseInput";
-import LoginButton from "../../components/buttons/LoginButton";
+import { PulseLoader } from "react-spinners";
 
 interface CreateOnboardingPlanState {
   title: string;
@@ -12,10 +12,12 @@ const CreateOnboardingPlan = ({
   defaultTitle,
   defaultDescription,
   onFormSubmit,
+  loading,
 }: {
   defaultTitle?: string;
   defaultDescription?: string;
   onFormSubmit: (obj: CreateOnboardingPlanState) => void;
+  loading?: boolean;
 }) => {
   const [state, setState] = useState<CreateOnboardingPlanState>({
     title: defaultTitle || "",
@@ -64,9 +66,22 @@ const CreateOnboardingPlan = ({
         <button
           type="submit"
           onClick={handleSubmitForm}
-          className="w-full h-16 text-white bg-primary hover:bg-primaryDark focus:outline-none  font-medium rounded-md text-md text-center py-3"
+          className="w-full h-16 text-white bg-primary hover:bg-primaryDark focus:outline-none  font-medium rounded-md text-md text-center py-3 disabled:bg-borderColorLight"
+          disabled={loading}
         >
-          Submit
+          {loading ? (
+            <PulseLoader
+              color={"#ffffff"}
+              loading={loading}
+              size={10}
+              cssOverride={{ width: "100%" }}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+              speedMultiplier={0.5}
+            />
+          ) : (
+            "Submit"
+          )}
         </button>
       </div>
     </form>

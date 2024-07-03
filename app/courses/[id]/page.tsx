@@ -1,49 +1,66 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  ADMIN,
-  COURSES_ARRAY,
-  ONBOARDING_PLAN_DETAILS,
-} from "@/constants/fixtures";
+import { COURSES_ARRAY } from "@/constants/fixtures";
 import Course from "@/src/components/Course";
 import BaseCard from "@/src/components/cards/BaseCard";
 import SearchableInput from "@/src/components/inputs/SearchInput";
 import { Icon } from "@iconify/react";
 import { formatDate } from "@/util/helpers";
 import isAuth from "@/src/components/isAuth";
+import { useParams, useRouter } from "next/navigation";
+import {
+  subscribeToDocument,
+  updateDocEntry,
+} from "@/services/firebase/helpers";
+import { COURSES_COLLECTION } from "@/constants/collectionNames";
+import AddMaterial from "@/src/components/course/AddMaterial";
+import CourseMaterial from "@/src/components/course/CourseMaterial";
+import { toast } from "react-toastify";
+import Loading from "@/src/components/LoadingComponent";
 // import Chart from "@/src/components/charts/Chart";
 // import LineChart from "@/src/components/charts/LineChart";
 
 const CourseDetails = () => {
-  const plan = ONBOARDING_PLAN_DETAILS;
-  const user = ADMIN;
-  const [searchedCourse, setSearchedCourse] = useState<string>("");
-  const [courses, setCourses] = useState<Array<any>>([]);
+  const route = useRouter();
+  const params = useParams();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [selectedMaterial, setSelectedMaterial] = useState({});
+  const [course, setCourse] = useState<any>({});
 
+  const handleOnUpdateData = (newChanges: any) => {
+    setCourse(newChanges);
+    setLoading(false);
+  };
   useEffect(() => {
-    // To Update searched course
-    console.log(
-      "=====",
-      COURSES_ARRAY.filter((elt) =>
-        elt.title
-          .toLocaleLowerCase()
-          .includes(searchedCourse.toLocaleLowerCase())
-      )
-    );
-
-    if (searchedCourse.length > 0) {
-      setCourses(
-        COURSES_ARRAY.filter((elt) => elt.title.includes(searchedCourse))
+    return () =>
+      subscribeToDocument(
+        COURSES_COLLECTION,
+        handleOnUpdateData,
+        params.id.toLocaleString()
       );
+  }, [params.id]);
+
+  const handleSubmitMaterial = async (materialData: any) => {
+    const newCourseInfo = {
+      ...course,
+      materials: course.materials
+        ? [...course.materials, materialData]
+        : [materialData],
+    };
+    const courseUpdated = await updateDocEntry(
+      COURSES_COLLECTION,
+      params.id.toLocaleString(),
+      newCourseInfo
+    );
+    if (courseUpdated) {
+      toast.success("Material Added Successfully", {
+        hideProgressBar: true,
+        closeOnClick: true,
+        autoClose: 3000,
+      });
     }
-  }, [searchedCourse]);
-  const handleInputChange = (e: any) => {
-    e.preventDefault();
-    setSearchedCourse(e.target.value.trim());
   };
-  const handleCourseClick = (course: any) => {
-    console.log("Should Add course to Applicant onboarding", course);
-  };
+  const handleMaterialClick = (material: any) => setSelectedMaterial(material);
 
   const handleSecondaryBtn = (condition: string) => {
     switch (condition) {
@@ -55,88 +72,56 @@ const CourseDetails = () => {
         break;
     }
   };
+
   return (
     <div>
-      <BaseCard className="px-10 py-10 flex flex-row max-md:flex-col max-md:divide-y-2 md:divide-x-2 text-textDarkColor">
-        <div className="w-full pr-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-lg font-semibold text-textDarkColor">
-                {plan.title}
-              </h1>
-            </div>
-            <button
-              className="inline-flex self-center items-center p-2 text-sm font-medium text-center text-red-600 bg-inherit rounded-full hover:bg-red-600 hover:text-white focus:outline-none"
-              type="button"
-              onClick={() => handleSecondaryBtn("delete")}
-            >
-              <Icon icon="mdi:delete" fontSize={20} />
-            </button>
-          </div>
-          <span className="text-textLightColor/70 text-sm font-light">
-            Created: {formatDate(plan.createdAt)}
-          </span>
-          <p className="text-sm text-textLightColor py-5">{plan.description}</p>
-          <div className="flex justify-between">
-            <span className="text-base text-textLightColor font-semibold">
-              Taken By
-            </span>
-            <span className="text-base text-primary font-semibold">
-              {plan.students} Students
-            </span>
-          </div>
-          <div className="py-5">
-            <span className="text-yellow-400">{`"TODO: Implement analytics chart to show assignments"`}</span>
-          </div>
-        </div>
-
-        <div className="w-full">
-          <div className="w-full md:px-10 max-md:pt-10">
-            <h1 className="text-xl font-semibold text-textLightColor pb-5">
-              Courses
-            </h1>
-            <div>
-              {plan.courses.map((course) => (
-                <div key={course.title}>
-                  <Course title={course.title} duration={course.duration} />
-                  <hr />
+      <BaseCard className="px-10 py-10 ">
+        {!course.title ? (
+          <Loading />
+        ) : (
+          <div className="flex flex-row max-md:flex-col max-md:divide-y-2 md:divide-x-2 text-textDarkColor">
+            <div className="w-3/5 pr-5 max-md:w-full">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-lg font-semibold text-textDarkColor">
+                    {course.title}
+                  </h1>
                 </div>
-              ))}
-              <div className="py-1.5">
-                <SearchableInput
-                  inputID="courseSearch"
-                  value={searchedCourse}
-                  onInputChange={handleInputChange}
-                  inputClassName="rounded-lg"
-                  placeholder="Search course to add..."
+                <button
+                  className="inline-flex self-center items-center p-2 text-sm font-medium text-center text-red-600 bg-inherit rounded-full hover:bg-red-600 hover:text-white focus:outline-none"
+                  type="button"
+                  onClick={() => handleSecondaryBtn("delete")}
+                >
+                  <Icon icon="mdi:delete" fontSize={20} />
+                </button>
+              </div>
+              <span className="text-textLightColor/70 text-sm font-light">
+                Created: {formatDate(course?.createdAt)}
+              </span>
+              <p className="text-sm text-textLightColor py-5">
+                {course.description}
+              </p>
+              <div>
+                <span className="text-base text-textLightColor font-semibold">
+                  Materials
+                </span>
+              </div>
+              <div className="py-5">
+                <CourseMaterial
+                  handleMaterialClicked={handleMaterialClick}
+                  data={course.materials || []}
                 />
-
-                <div className="p-1.5">
-                  {courses.length > 0 && (
-                    <BaseCard>
-                      {courses.map((course, index) => (
-                        <div key={course.id}>
-                          <div
-                            className={`px-1.5 cursor-pointer hover:bg-primary/25 ${
-                              index === 0 && "rounded-t-lg"
-                            }`}
-                            onClick={() => handleCourseClick(course)}
-                          >
-                            <Course
-                              title={course.title}
-                              duration={course.duration}
-                            />
-                          </div>
-                          <hr />
-                        </div>
-                      ))}
-                    </BaseCard>
-                  )}
-                </div>
               </div>
             </div>
+            <div className="w-full">
+              <AddMaterial
+                handleSubmitMaterial={handleSubmitMaterial}
+                courseId={params.id.toLocaleString()}
+                selectedMaterial={selectedMaterial}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </BaseCard>
     </div>
   );

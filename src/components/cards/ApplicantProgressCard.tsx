@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import Course from "../Course";
+import ProgressBar from "../ProgressBar";
 
 const ApplicantProgressCard = ({
   photoUrl,
@@ -58,13 +59,7 @@ const ApplicantProgressCard = ({
       </div>
 
       <div className="px-1.5">
-        <h1 className="text-textLightColor text-sm">Progress</h1>
-        <div className="my-3 w-full bg-progressBarBackgroundColor rounded-full h-1.5">
-          <div
-            className="bg-primary h-1.5 rounded-full"
-            style={{ width: `${overAllProgress}%` }}
-          ></div>
-        </div>
+        <ProgressBar progress={50} />
       </div>
 
       <div>

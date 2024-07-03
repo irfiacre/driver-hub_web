@@ -7,16 +7,21 @@ import Link from "next/link";
 import BaseModel from "../models/BaseModel";
 import CreateOnboardingPlan from "@/src/views/forms/CreateOnboardingPlan";
 import { Icon } from "@iconify/react";
+import { COURSES_COLLECTION } from "@/constants/collectionNames";
+import { toast } from "react-toastify";
+import { generateId } from "@/util/helpers";
+import { createDocEntry } from "@/services/firebase/helpers";
 
 const CoursesTable = ({ data }: { data: Array<any> }) => {
   const [searchText, setSearchText] = useState("");
   const [tableData, updateTableData] = useState(data);
+  const [loading, setLoading] = useState<boolean>(false);
   const [openModel, setOnboardingPlan] = useState<boolean>(false);
   const [editValues, setEditValues] = useState({
     title: "",
     description: "",
   });
-
+  const [user, setUser] = useState(null);
   useEffect(() => {
     updateTableData(
       data.filter((item) =>
@@ -25,18 +30,42 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
           : item.title.toLowerCase().includes(searchText.trim().toLowerCase())
       )
     );
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      setUser(JSON.parse(userStr));
+    }
   }, [data, searchText]);
 
   const handleSidebarSearch = (e: any) => {
     e.preventDefault();
     setSearchText(e.target.value);
   };
-  const handleCreatePlan = (obj: "create" | any) => {
-    if (obj === "create") {
+  const handleAddCourse = async (courseObj: "create" | any) => {
+    if (courseObj === "create") {
       setOnboardingPlan(true);
     } else {
-      console.log("Should submit the entered values", obj);
-      handleCloseModel();
+      setLoading(true);
+      const courseFormat = {
+        ...courseObj,
+        id: generateId(courseObj.title),
+        author: user,
+        status: "pending",
+        createdAt: new Date(),
+        materials: [],
+      };
+      const courseAdded = await createDocEntry(
+        COURSES_COLLECTION,
+        courseFormat
+      );
+      if (courseAdded) {
+        toast.success("Course Created", {
+          hideProgressBar: true,
+          closeOnClick: true,
+          autoClose: 3000,
+        });
+        handleCloseModel();
+      }
+      setLoading(true);
     }
   };
 
@@ -74,15 +103,23 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
         >
           <div className="">
             <CreateOnboardingPlan
-              onFormSubmit={handleCreatePlan}
+              onFormSubmit={handleAddCourse}
               defaultDescription={editValues.description}
               defaultTitle={editValues.title}
+              loading={loading}
             />
           </div>
         </BaseModel>
       )}
       <div className="py-5 text-textLightColor text-base font-semibold flex flex-row justify-between items-center">
         <span>Total = {data.length}</span>
+        <button
+          type="button"
+          onClick={() => handleAddCourse("create")}
+          className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4"
+        >
+          Add New
+        </button>
       </div>
       <div className="py-2.5 text-textLightColor text-base font-semibold flex flex-row align-middle items-center px-1.5 gap-3.5 cursor-pointer bg-backgroundColor">
         <span className="w-full">Title</span>
@@ -92,23 +129,23 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
       </div>
       <hr />
       <div>
-        {tableData.map((item, index) => (
-          <div key={item.applicant}>
+        {tableData.map((item) => (
+          <div key={item.id}>
             <div className="flex flex-row align-middle items-center py-2.5 px-1.5 gap-1.5 cursor-pointer hover:bg-backgroundColor">
               <div className="w-full">
-                <Link href={`/plans/${index + 1}`}>
+                <Link href={`/courses/${item.id}`}>
                   <span>{item.title}</span>
                 </Link>
               </div>
               <div className="text-sm w-full">
-                <Link href={`/plans/${index + 1}`}>
+                <Link href={`/courses/${item.id}`}>
                   <span className="text-textLightColor font-light">
                     {item.description.substring(0, 50)}
                   </span>
                 </Link>
               </div>
               <div className="w-2/4">
-                <Link href={`/plans/${index + 1}`}>
+                <Link href={`/courses/${item.id}`}>
                   <span>{item.courses}</span>
                 </Link>
               </div>
