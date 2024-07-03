@@ -32,6 +32,7 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
     e.preventDefault();
     setSearchText(e.target.value);
   };
+
   return (
     <BaseCard className="px-10 py-5">
       <SearchableInput
@@ -43,27 +44,25 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
       <div className="py-2.5 text-primary text-base">Applications</div>
       <hr />
       <div>
-        {tableData.map((item, index) => (
-          <div key={item.applicant}>
-            <Link href={`/applications/${index + 1}`}>
+        {tableData.map((item) => (
+          <div key={item.id}>
+            <Link href={`/applications/${item.id}`}>
               <div className="flex flex-row align-middle items-center py-2.5 px-1.5 gap-3.5 cursor-pointer hover:bg-primary_3">
-                <div className="">
+                <div className="h-10">
                   <Image
                     className="rounded-full cursor-pointer"
-                    loader={() => item.photoUrl}
-                    src={item.photoUrl}
+                    loader={() => item.applicantProfile.passportPhotoUrl}
+                    src={item.applicantProfile.passportPhotoUrl}
                     alt="Rounded avatar"
-                    height={70}
+                    height={50}
                     width={70}
                     unoptimized
                   />
                 </div>
                 <div className="text-sm">
-                  <span className="text-textLightColor font-light">
-                    {item.description.substring(0, 120)}
-                  </span>
+                  <span className="text-textLightColor font-light">Driver</span>
                   <div className="flex flex-row align-middle items-center gap-2 py-1.5">
-                    <span className="font-semibold">{item.applicant}</span>
+                    <span className="font-semibold">{"item.applicant"}</span>
                     <span
                       className={`font-light text-xs ${
                         item.status === "Approved"
@@ -73,7 +72,7 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
                           : "text-textLightColor"
                       }`}
                     >
-                      {item.status}
+                      {item?.status || "unknown"}
                     </span>
                   </div>
                 </div>
