@@ -17,11 +17,8 @@ import AddMaterial from "@/src/components/course/AddMaterial";
 import CourseMaterial from "@/src/components/course/CourseMaterial";
 import { toast } from "react-toastify";
 import Loading from "@/src/components/LoadingComponent";
-// import Chart from "@/src/components/charts/Chart";
-// import LineChart from "@/src/components/charts/LineChart";
 
 const CourseDetails = () => {
-  const route = useRouter();
   const params = useParams();
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedMaterial, setSelectedMaterial] = useState({});
