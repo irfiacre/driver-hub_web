@@ -23,7 +23,7 @@ export const uploadFile = async (
 
   const storageRef = ref(storage, `${REFERENCE_DIR}/` + fileName);
   const uploadTask = uploadBytesResumable(storageRef, formData);
-  await uploadTask.on(
+  uploadTask.on(
     "state_changed",
     (snapshot) => {},
     (error) => {

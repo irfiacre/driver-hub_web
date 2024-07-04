@@ -83,14 +83,29 @@ const AddMaterial = ({
     );
     setProgress(false);
   };
-  console.log(state);
 
   return (
     <div>
       <div className="w-full md:px-3.5 max-md:pt-10">
-        <h1 className="text-xl font-normal text-textLightColor pb-1">
-          Add Material
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-xl font-normal text-textLightColor pb-1">
+            Add Material
+          </h1>
+          <button
+            type="button"
+            onClick={() =>
+              setState({
+                title: "",
+                notes: "",
+                fileMetadata: null,
+              })
+            }
+            className="m-1.5 flex gap-2 text-textLightColor bg-white hover:bg-borderColorLight hover:text-white hover:border-borderColorLight focus:outline-none rounded-full text-sm text-center py-1 px-6 border border-borderColorLight"
+            disabled={loading}
+          >
+            Reset
+          </button>
+        </div>
       </div>
       <form className="w-full">
         <div>

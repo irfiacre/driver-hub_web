@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
 import BaseCard from "../cards/BaseCard";
@@ -10,16 +11,21 @@ import { Icon } from "@iconify/react";
 import { COURSES_COLLECTION } from "@/constants/collectionNames";
 import { toast } from "react-toastify";
 import { generateId } from "@/util/helpers";
-import { createDocEntry } from "@/services/firebase/helpers";
+import {
+  createDocEntry,
+  deleteDocEntryById,
+  updateDocEntry,
+} from "@/services/firebase/helpers";
 
 const CoursesTable = ({ data }: { data: Array<any> }) => {
   const [searchText, setSearchText] = useState("");
   const [tableData, updateTableData] = useState(data);
   const [loading, setLoading] = useState<boolean>(false);
-  const [openModel, setOnboardingPlan] = useState<boolean>(false);
+  const [openModel, setOpenCourseModel] = useState<boolean>(false);
   const [editValues, setEditValues] = useState({
     title: "",
     description: "",
+    id: "",
   });
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -42,21 +48,31 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
   };
   const handleAddCourse = async (courseObj: "create" | any) => {
     if (courseObj === "create") {
-      setOnboardingPlan(true);
+      setOpenCourseModel(true);
     } else {
       setLoading(true);
-      const courseFormat = {
-        ...courseObj,
-        id: generateId(courseObj.title),
-        author: user,
-        status: "pending",
-        createdAt: new Date(),
-        materials: [],
-      };
-      const courseAdded = await createDocEntry(
-        COURSES_COLLECTION,
-        courseFormat
-      );
+      const courseFormat = editValues.title
+        ? {
+            ...editValues,
+            title: courseObj.title,
+            description: courseObj.description,
+          }
+        : {
+            ...courseObj,
+            id: generateId(courseObj.title),
+            author: user,
+            status: "pending",
+            createdAt: new Date(),
+            materials: [],
+          };
+
+      const courseAdded = editValues.title
+        ? await updateDocEntry(
+            COURSES_COLLECTION,
+            courseFormat.id,
+            courseFormat
+          )
+        : await createDocEntry(COURSES_COLLECTION, courseFormat);
       if (courseAdded) {
         toast.success("Course Created", {
           hideProgressBar: true,
@@ -65,26 +81,36 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
         });
         handleCloseModel();
       }
-      setLoading(true);
+      setLoading(false);
     }
   };
 
   const handleCloseModel = () => {
-    setOnboardingPlan(false);
+    setOpenCourseModel(false);
     setEditValues({
       title: "",
       description: "",
+      id: "",
     });
   };
-  const handleEditPlan = (plan: any) => {
-    setOnboardingPlan(true);
+  const handleEditCourse = (course: any) => {
+    setOpenCourseModel(true);
     setEditValues({
-      title: plan.title,
-      description: plan.description,
+      ...course,
+      title: course.title,
+      description: course.description,
     });
   };
-  const handleDelete = (plan: any) =>
-    console.log("---- should delete plan:", plan);
+  const handleDelete = async (course: any) => {
+    const deleted = await deleteDocEntryById(COURSES_COLLECTION, course.id);
+    if (deleted) {
+      toast.success(`${course.title} is Deleted`, {
+        hideProgressBar: true,
+        closeOnClick: true,
+        autoClose: 3000,
+      });
+    }
+  };
   return (
     <BaseCard className="px-10 py-5">
       <SearchableInput
@@ -96,7 +122,7 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
       {openModel && (
         <BaseModel
           title={
-            editValues.title ? `Edit (${editValues.title})` : "Create Plan"
+            editValues.title ? `Edit (${editValues.title})` : "Create Course"
           }
           onClose={handleCloseModel}
           containerStyle="w-4/5 p-10"
@@ -133,7 +159,21 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
           <div key={item.id}>
             <div className="flex flex-row align-middle items-center py-2.5 px-1.5 gap-1.5 cursor-pointer hover:bg-backgroundColor">
               <div className="w-full">
-                <Link href={`/courses/${item.id}`}>
+                <Link
+                  href={`/courses/${item.id}`}
+                  className="flex gap-2 items-center"
+                >
+                  {item.thumbnail?.url ? (
+                    <img
+                      src={item.thumbnail.url}
+                      alt="Thumbnail"
+                      height={"80px"}
+                      width={"80px"}
+                      className="rounded-md"
+                    />
+                  ) : (
+                    ""
+                  )}
                   <span>{item.title}</span>
                 </Link>
               </div>
@@ -153,7 +193,7 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
                 <button
                   className="inline-flex self-center items-center p-2 text-sm font-medium text-center text-textLightColor bg-inherit rounded-full hover:bg-textDarkColor hover:text-white focus:outline-none"
                   type="button"
-                  onClick={() => handleEditPlan(item)}
+                  onClick={() => handleEditCourse(item)}
                 >
                   <Icon icon="tabler:edit" fontSize={20} />
                 </button>{" "}
