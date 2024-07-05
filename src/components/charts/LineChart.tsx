@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Chart from "react-apexcharts";
+import dynamic from "next/dynamic";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: true });
 
 const LineChart = () => {
   const [state, setState] = useState({
@@ -32,6 +34,7 @@ const LineChart = () => {
         series={state.series}
         type="area"
         height={320}
+        width={"100%"}
       />
     </div>
   );

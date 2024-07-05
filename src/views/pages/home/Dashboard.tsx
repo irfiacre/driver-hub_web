@@ -2,7 +2,7 @@ import { getAllStaff } from "@/services/firebase/authentication";
 import AnalyticsCard from "@/src/components/cards/AnalyticsCard";
 import BaseCard from "@/src/components/cards/BaseCard";
 import UsersTable from "@/src/components/tables/UsersTable";
-// import Chart from "@/src/components/charts/Chart";
+import Chart from "@/src/components/charts/Chart";
 import React, { useEffect, useState } from "react";
 
 const DashboardPage = () => {
@@ -55,9 +55,9 @@ const DashboardPage = () => {
           </div>
         ))}
       </div>
-      {/* <div>
+      <div>
         <Chart title="Weekly Onboarding hours" />
-      </div> */}
+      </div>
 
       <BaseCard className="px-10 py-5">
         <div className="flex flex-row justify-between p-1.5 mb-5">

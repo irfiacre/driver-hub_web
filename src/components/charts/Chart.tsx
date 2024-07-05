@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import BaseCard from "../cards/BaseCard";
 import LineChart from "./LineChart";

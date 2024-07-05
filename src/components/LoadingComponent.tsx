@@ -1,5 +1,14 @@
+"use client";
 import React from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
+
+const Player = dynamic(
+  async () =>
+    import("@lottiefiles/react-lottie-player").then(({ Player }) => ({
+      default: Player, // note the alias to `default`!
+    })),
+  { ssr: false }
+);
 
 const Loading = () => {
   return (
