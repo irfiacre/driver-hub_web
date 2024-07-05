@@ -4,20 +4,37 @@ import { signOutUser } from "@/services/firebase/authentication";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const TopNav = ({ user, title }: { user: any; title: string }) => {
+  const params: any = useParams();
   const [isActive, handleDropdown] = useState(false);
+  const [currentTitle, setCurrentTitle] = useState("Overview");
+
   const router = useRouter();
   const handleLogout = async () => {
     localStorage.removeItem("user");
     await signOutUser();
     router.replace("/");
   };
+
+  useEffect(() => {
+    const currentUrl = window.location.href.split("/");
+    setCurrentTitle(
+      params.id
+        ? `${params.id?.substring(0, 20)}...`
+        : currentUrl[currentUrl.length - 1]
+        ? currentUrl[currentUrl.length - 1]
+        : "overview"
+    );
+  }, [params]);
+
+  const hasBack = false;
+
   return (
     <div className="flex flex-row justify-between">
-      <h1 className="text-primary text-2xl">{title}</h1>
+      <h1 className="text-primary text-2xl capitalize">{currentTitle}</h1>
       <div className="mr-6 flex flex-row gap-3 items-center text-notificationIconColor">
         <div className="">
           <Icon icon="zondicons:notification" fontSize={20} />

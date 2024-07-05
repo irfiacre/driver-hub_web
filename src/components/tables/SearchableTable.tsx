@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
 import BaseCard from "../cards/BaseCard";
@@ -43,7 +44,7 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
             <Link href={`/applications/${item.id}`}>
               <div className="flex flex-row align-middle items-center py-2.5 px-1.5 gap-3.5 cursor-pointer hover:bg-primary_3">
                 <div className="overflow-hidden">
-                  <Image
+                  {/* <Image
                     className="rounded-full cursor-pointer"
                     loader={() => item.baseInformation.passportPhotoUrl}
                     src={item.baseInformation.passportPhotoUrl}
@@ -51,6 +52,13 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
                     height={80}
                     width={80}
                     unoptimized
+                  /> */}
+                  <img
+                    src={item.baseInformation.passportPhotoUrl}
+                    alt="Thumbnail"
+                    height={"80px"}
+                    width={"80px"}
+                    className="rounded-full cursor-pointer h-20 w-20 object-cover"
                   />
                 </div>
                 <div className="text-sm">
@@ -87,9 +95,9 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
           </div>
         ))}
       </div>
-      <div className="w-full py-10">
-        <Pagination prevPage={1} currentPage={2} nextPage={3} totalPages={5} />
-      </div>
+      {/* <div className="w-full py-10">
+        <Pagination prevPage={1} currentPage={1} nextPage={3} totalPages={5} />
+      </div> */}
     </BaseCard>
   );
 };
