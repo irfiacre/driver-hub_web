@@ -14,8 +14,6 @@ const Courses = () => {
     return () => subscribeToCollection(COURSES_COLLECTION, handleOnUpdateData);
   }, []);
 
-  console.log(data);
-
   return <div>{!data[0] ? <Loading /> : <CoursesTable data={data} />}</div>;
 };
 

@@ -62,7 +62,7 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
             id: generateId(courseObj.title),
             author: user,
             status: "pending",
-            createdAt: new Date(),
+            createdAt: new Date().toISOString(),
             materials: [],
           };
 

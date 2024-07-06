@@ -1,15 +1,27 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import { PLANS_COLLECTION } from "@/constants/collectionNames";
 import { ONBOARDING_PLANS } from "@/constants/fixtures";
+import { subscribeToCollection } from "@/services/firebase/helpers";
 import isAuth from "@/src/components/isAuth";
 import OnboardingPlansTable from "@/src/components/tables/OnboardingPlansTable";
-import React from "react";
+import Loading from "@/src/components/LoadingComponent";
 
 const OnboardingPlans = () => {
-  const applicationsData = ONBOARDING_PLANS;
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<any>([]);
+  const handleOnUpdateData = (newChanges: any) => {
+    setData((prevData: any) => [...prevData, newChanges]);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    return () => subscribeToCollection(PLANS_COLLECTION, handleOnUpdateData);
+  }, []);
+
   return (
-    <div>
-      <OnboardingPlansTable data={applicationsData} />
-    </div>
+    <div>{loading ? <Loading /> : <OnboardingPlansTable data={data} />}</div>
   );
 };
 

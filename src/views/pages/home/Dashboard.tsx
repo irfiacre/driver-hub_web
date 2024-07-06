@@ -4,26 +4,28 @@ import BaseCard from "@/src/components/cards/BaseCard";
 import UsersTable from "@/src/components/tables/UsersTable";
 import Chart from "@/src/components/charts/Chart";
 import React, { useEffect, useState } from "react";
+import { subscribeToCollection } from "@/services/firebase/helpers";
+import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
 
 const DashboardPage = () => {
-  const analytics = [
-    {
-      title: "Applications",
-      count: 150,
-    },
-    {
-      title: "Accepted",
-      count: 121,
-    },
-    {
-      title: "Pending",
-      count: 10,
-    },
-    {
-      title: "Rejected",
-      count: 5,
-    },
-  ];
+  // const analytics = [
+  //   {
+  //     title: "Applications",
+  //     count: 150,
+  //   },
+  //   {
+  //     title: "Accepted",
+  //     count: 121,
+  //   },
+  //   {
+  //     title: "Pending",
+  //     count: 10,
+  //   },
+  //   {
+  //     title: "Rejected",
+  //     count: 5,
+  //   },
+  // ];
 
   const moreStatistics = [
     { title: "Finished Onboarding", count: 456 },
@@ -45,6 +47,33 @@ const DashboardPage = () => {
       setUser(userObj);
     }
   }, []);
+
+  const [data, setData] = useState<any>([]);
+  const handleOnUpdateData = (newChanges: any) =>
+    setData((prevData: any) => [...prevData, newChanges]);
+  useEffect(() => {
+    return () =>
+      subscribeToCollection(APPLICATIONS_COLLECTION, handleOnUpdateData);
+  }, []);
+
+  const analytics = [
+    {
+      title: "Applications",
+      count: data.length,
+    },
+    {
+      title: "Accepted",
+      count: data.filter((elt: any) => elt.status === "approved").length,
+    },
+    {
+      title: "Pending",
+      count: data.filter((elt: any) => elt.status === "pending").length,
+    },
+    {
+      title: "Rejected",
+      count: data.filter((elt: any) => elt.status === "rejected").length,
+    },
+  ];
 
   return (
     <div className="flex flex-col gap-5">

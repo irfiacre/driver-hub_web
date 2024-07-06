@@ -3,7 +3,6 @@ import {
   APPLICATIONS_COLLECTION,
   COURSES_COLLECTION,
 } from "@/constants/collectionNames";
-import { OFFICER } from "@/constants/fixtures";
 import {
   getCollectionEntries,
   subscribeToDocument,
