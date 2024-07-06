@@ -7,48 +7,6 @@ import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
 import Loading from "@/src/components/LoadingComponent";
 
 const Applications = () => {
-  const applicationsData = [
-    {
-      applicant: "Lego Admin",
-      status: "Pending",
-      description:
-        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
-      createdAt: new Date(),
-      photoUrl: "https://i.pravatar.cc/300",
-    },
-    {
-      applicant: "Steve Jobs",
-      status: "Approved",
-      description:
-        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
-      createdAt: new Date(),
-      photoUrl: "https://i.pravatar.cc/300",
-    },
-    {
-      applicant: "David Goggins",
-      status: "Approved",
-      description:
-        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
-      createdAt: new Date(),
-      photoUrl: "https://i.pravatar.cc/300",
-    },
-    {
-      applicant: "John Doe",
-      status: "Pending",
-      description:
-        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
-      createdAt: new Date(),
-      photoUrl: "https://i.pravatar.cc/300",
-    },
-    {
-      applicant: "Jane Doe",
-      status: "Rejected",
-      description:
-        "lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
-      createdAt: new Date(),
-      photoUrl: "https://i.pravatar.cc/300",
-    },
-  ];
   const [data, setData] = useState<any>([]);
   const handleOnUpdateData = (newChanges: any) =>
     setData((prevData: any) => [...prevData, newChanges]);

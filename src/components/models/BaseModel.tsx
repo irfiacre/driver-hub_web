@@ -13,7 +13,7 @@ const BaseModel = ({
   containerStyle?: string;
 }) => {
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity flex justify-center items-center">
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity flex justify-center items-center z-50">
       <div className={containerStyle}>
         <BaseCard className="h-1/4">
           <div className="flex flex-row items-center justify-between p-5">

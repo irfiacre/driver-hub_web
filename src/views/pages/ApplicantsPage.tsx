@@ -7,7 +7,7 @@ import { APPLICANT_COURSES } from "@/constants/fixtures";
 import SearchableInput from "@/src/components/inputs/SearchInput";
 
 const ApplicantsPage = ({ applicants }: { applicants: Array<any> }) => {
-  const [selectedChatPartner, setSelectedChatPartner] = useState(applicants[0]);
+  const [selectedChatPartner, setSelectedChatPartner] = useState<any>(null);
   const [searchedApplicant, setSearchedApplicant] = useState<string>("");
   const [applicantsState, setApplicantState] = useState<Array<any>>([]);
 
@@ -21,22 +21,18 @@ const ApplicantsPage = ({ applicants }: { applicants: Array<any> }) => {
     } else {
       setApplicantState(applicants);
     }
+    setSelectedChatPartner(applicants[0]);
   }, [applicants, searchedApplicant]);
 
   const handleClickChartPartner = (partner: any) => {
     setSelectedChatPartner(partner);
   };
 
-  const applicantStatistics = [
-    { title: "Finished Courses", count: 1 },
-    { title: "Unfinished Courses", count: 2 },
-    { title: "Time Spent", count: "30 minutes" },
-  ];
-
   const handleInputChange = (e: any) => {
     e.preventDefault();
     setSearchedApplicant(e.target.value);
   };
+  console.log("=====", selectedChatPartner);
 
   return (
     <div className="w-full py-10 flex flex-row max-md:flex-col gap-2 text-textDarkColor">
@@ -57,16 +53,16 @@ const ApplicantsPage = ({ applicants }: { applicants: Array<any> }) => {
         </div>
 
         <BaseCard className="px-5 py-5 overflow-auto h-full">
-          {applicantsState.map((applicant) => (
+          {applicantsState.map((application) => (
             <div
-              key={applicant.id}
-              onClick={() => handleClickChartPartner(applicant)}
+              key={application.applicant.userId}
+              onClick={() => handleClickChartPartner(application)}
             >
               <ApplicantProgress
-                key={applicant.id}
-                photoUrl={applicant.photoUrl}
-                name={applicant.name}
-                progress={`Progress ${applicant.progress}%`}
+                key={application.applicant.userId}
+                photoUrl={application.baseInformation.passportPhotoUrl}
+                name={`${application.applicant.firstName} ${application.applicant.lastName}`}
+                progress={`Progress ${application.onboardingPlan?.progress}%`}
               />
               <hr />
             </div>
@@ -75,13 +71,33 @@ const ApplicantsPage = ({ applicants }: { applicants: Array<any> }) => {
       </div>
 
       <BaseCard className="w-full px-10 py-5 h-5/6  max-md:mt-16">
-        <ApplicantProgressCard
-          photoUrl={selectedChatPartner.photoUrl}
-          name={selectedChatPartner.name}
-          overAllProgress={20}
-          onboardingCourses={APPLICANT_COURSES}
-          statistics={applicantStatistics}
-        />
+        {
+          <ApplicantProgressCard
+            photoUrl={
+              selectedChatPartner
+                ? selectedChatPartner.baseInformation.passportPhotoUrl
+                : ""
+            }
+            name={
+              selectedChatPartner
+                ? `${selectedChatPartner.applicant.firstName} ${selectedChatPartner.applicant.lastName}`
+                : ""
+            }
+            overAllProgress={
+              selectedChatPartner
+                ? selectedChatPartner.onboardingPlan.progress
+                : 0
+            }
+            onboardingCourses={
+              selectedChatPartner
+                ? selectedChatPartner.onboardingPlan.courses
+                : []
+            }
+            statistics={
+              selectedChatPartner ? selectedChatPartner.onboardingPlan : {}
+            }
+          />
+        }
       </BaseCard>
     </div>
   );

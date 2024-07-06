@@ -17,7 +17,7 @@ const LineChart = () => {
         enabled: false,
       },
       xaxis: {
-        categories: ["Mon", "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"],
+        categories: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
       },
     },
     series: [

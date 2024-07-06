@@ -72,7 +72,8 @@ const Application = ({ user }: { user: any }) => {
     e.preventDefault();
     setSearchedCourse(e.target.value.trim());
   };
-  const handleSubmitOnboardingCourse = async (course: any) => {
+  const handleSubmitOnboardingCourse = async (courseData: any) => {
+    const course = { ...courseData, completed: false };
     const ONBOARDING_COURSES = applicationInfo.onboardingPlan
       ? [...applicationInfo.onboardingPlan.courses, course]
       : [course];
@@ -240,7 +241,7 @@ const Application = ({ user }: { user: any }) => {
               Onboarding Plan
             </h1>
             <div>
-              {applicationInfo.onboardingPlan.courses.map((plan: any) => (
+              {applicationInfo.onboardingPlan?.courses.map((plan: any) => (
                 <div key={plan.title}>
                   <Course title={plan.title} duration={plan.duration} />
                   <hr />

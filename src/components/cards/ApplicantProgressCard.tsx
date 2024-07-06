@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import React from "react";
 import Course from "../Course";
@@ -21,14 +22,12 @@ const ApplicantProgressCard = ({
       <div>
         <div className="pb-3.5 px-1.5 flex flex-row justify-start items-center gap-5">
           <div>
-            <Image
-              className="rounded-full w-16 bg-textLightColor border border-borderColorLight"
-              loader={() => photoUrl}
+            <img
               src={photoUrl}
-              alt="Applicant photo"
-              height={100}
-              width={100}
-              unoptimized
+              alt="Thumbnail"
+              height={"100px"}
+              width={"100px"}
+              className="rounded-full bg-textLightColor border border-borderColorLight object-cover"
             />
           </div>
           <div>
@@ -49,8 +48,13 @@ const ApplicantProgressCard = ({
         {onboardingCourses.map((course) => (
           <div key={course.id}>
             <Course
+              // duration To be added
               title={course.title}
-              duration={course.duration}
+              duration={
+                course.duration
+                  ? course.duration
+                  : Math.round(Math.random() * 50)
+              }
               progress={course.progress}
             />
             <hr />
@@ -59,7 +63,7 @@ const ApplicantProgressCard = ({
       </div>
 
       <div className="px-1.5">
-        <ProgressBar progress={50} />
+        <ProgressBar progress={overAllProgress} />
       </div>
 
       <div>
@@ -67,14 +71,24 @@ const ApplicantProgressCard = ({
           <h1 className="text-lg font-medium">Statistics</h1>
           <span className="text-textLightColor font-light">Just Now</span>
         </div>
-        {statistics.map((item: any) => (
-          <div key={item.title}>
-            <div className="flex flex-row justify-between p-1.5">
-              <h1 className="font-medium">{item.title}</h1>
-              <span className="text-textLightColor">{item.count}</span>
-            </div>
+
+        <div>
+          <div className="flex flex-row justify-between p-1.5">
+            <h1 className="font-medium">Finished Courses:</h1>
+            <span className="text-textLightColor">
+              {statistics.finishedCourses}
+            </span>
           </div>
-        ))}
+        </div>
+
+        <div>
+          <div className="flex flex-row justify-between p-1.5">
+            <h1 className="font-medium">Unfinished Courses:</h1>
+            <span className="text-textLightColor">
+              {statistics.totalCourses - statistics.finishedCourses}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
