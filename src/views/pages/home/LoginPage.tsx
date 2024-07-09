@@ -40,7 +40,7 @@ const LoginPage = () => {
             Login to Dashboard
           </p>
           <p className="py-2 text-textLightColor text-sm text-center">
-            Complete details to sign in
+            Complete details to sign in!
           </p>
         </div>
         <div className="w-full flex justify-center">
