@@ -74,6 +74,7 @@ const DashboardPage = () => {
       count: data.filter((elt: any) => elt.status === "rejected").length,
     },
   ];
+  console.log("-------", analytics);
 
   return (
     <div className="flex flex-col gap-5">
