@@ -105,6 +105,31 @@ const Application = ({ user }: { user: any }) => {
   const handleOpenChat = () => {
     console.log("Handle Open chat");
   };
+  const sendDecisionEmail = async (decision: string) => {
+    const res = await fetch("/api/sendEmail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: applicationInfo.applicant.email,
+        subject: `Hello ${applicationInfo.applicant.lastName}`,
+        message: `
+        <h3>Your Application to YegoCabs has been ${decision}!</h3>
+        `,
+        title: "Decision on your Application",
+      }),
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const handleSecondaryBtn = async (condition: string) => {
     let STATUS = "";
     switch (condition) {
@@ -125,6 +150,9 @@ const Application = ({ user }: { user: any }) => {
       newApplicationInfo
     );
     if (statusUpdated) {
+      if (STATUS !== "ready") {
+        await sendDecisionEmail(STATUS);
+      }
       toast.success(`Application Status Updated (${STATUS}) successfully`, {
         hideProgressBar: true,
         closeOnClick: true,

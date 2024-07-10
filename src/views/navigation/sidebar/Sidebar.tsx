@@ -38,8 +38,8 @@ export const Sidebar = () => {
         icon: "icon-park-outline:list",
       },
       {
-        title: "Applicants",
-        subtitle: "Track applicants progress",
+        title: "Employees",
+        subtitle: "Track employees onboarding progress",
         url: "applicants",
         icon: "material-symbols:supervised-user-circle",
       },

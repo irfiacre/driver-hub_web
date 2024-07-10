@@ -119,7 +119,9 @@ const UsersTable = ({ data }: { data: Array<any> }) => {
           </BaseModel>
         )}
         <div className="py-5 text-textLightColor flex flex-row justify-between items-center">
-          <div className="py-2.5 text-primary text-base">Staff Users</div>
+          <div className="py-2.5 text-primary text-base">
+            Users (Admins & Officers)
+          </div>
           <button
             type="button"
             onClick={() => handleCreatePlan("create")}

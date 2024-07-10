@@ -28,9 +28,9 @@ const DashboardPage = () => {
   // ];
 
   const moreStatistics = [
-    { title: "Finished Onboarding", count: 456 },
-    { title: "Currently Onboarding", count: 120 },
-    { title: "Available courses", count: 30 },
+    { title: "Finished Onboarding", count: 0 },
+    { title: "Currently Onboarding", count: 2 },
+    { title: "Available courses", count: 2 },
   ];
   const fetchStaff = async () => await getAllStaff();
 
