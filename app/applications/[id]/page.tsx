@@ -308,7 +308,7 @@ const Application = ({ user }: { user: any }) => {
               </div>
             </div>
 
-            {user.role !== "admin" ? (
+            {applicationInfo.status === "pending" || user.role !== "admin" ? (
               <div className="text-center py-10">
                 <button
                   type="button"
