@@ -206,7 +206,7 @@ const Application = ({ user }: { user: any }) => {
                 </span>
               </p>
               <p className="text-base text-textLightColor font-medium py-1.5">
-                Driver License:
+                Driver License:{" "}
                 <span className="text-textDarkColor font-light px-5">
                   {applicationInfo.baseInformation.driverLicenseId}
                 </span>
