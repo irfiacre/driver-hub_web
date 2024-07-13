@@ -11,6 +11,10 @@ import {
   where,
 } from "firebase/firestore";
 import { database } from "./authentication";
+import {
+  APPLICATIONS_COLLECTION,
+  DRIVERS_COLLECTION,
+} from "@/constants/collectionNames";
 
 export const subscribeToCollection = (
   collectionName: string,
@@ -132,6 +136,36 @@ export const deleteDocEntryById = async (
   try {
     const quizDocRef = doc(database, collectionName, docEntryId);
     await deleteDoc(quizDocRef);
+    return true;
+  } catch (error: any) {
+    return { ...error };
+  }
+};
+
+export const changeApplicantToEmployee = async (
+  userId: string,
+  applicationId: string,
+  newApplicationInfo: any
+): Promise<boolean> => {
+  try {
+    const driverObj = await findDocEntryByField(
+      DRIVERS_COLLECTION,
+      "userId",
+      userId
+    );
+    const driverUpdated = await updateDocEntry(
+      DRIVERS_COLLECTION,
+      driverObj.id,
+      { employee: true }
+    );
+    if (driverUpdated) {
+      await updateDocEntry(
+        APPLICATIONS_COLLECTION,
+        applicationId.toLocaleString(),
+        newApplicationInfo
+      );
+    }
+
     return true;
   } catch (error: any) {
     return { ...error };

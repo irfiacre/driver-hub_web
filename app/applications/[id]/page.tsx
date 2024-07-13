@@ -2,8 +2,10 @@
 import {
   APPLICATIONS_COLLECTION,
   COURSES_COLLECTION,
+  DRIVERS_COLLECTION,
 } from "@/constants/collectionNames";
 import {
+  changeApplicantToEmployee,
   getCollectionEntries,
   subscribeToDocument,
   updateDocEntry,
@@ -144,16 +146,24 @@ const Application = ({ user }: { user: any }) => {
         break;
     }
     const newApplicationInfo = { ...applicationInfo, status: STATUS };
-    const statusUpdated = await updateDocEntry(
-      APPLICATIONS_COLLECTION,
+
+    const applicantChanged = await changeApplicantToEmployee(
+      applicationInfo.applicant.userId,
       params.id.toLocaleString(),
       newApplicationInfo
     );
-    if (statusUpdated) {
+
+    if (applicantChanged) {
       if (STATUS !== "ready") {
         await sendDecisionEmail(STATUS);
       }
       toast.success(`Application Status Updated (${STATUS}) successfully`, {
+        hideProgressBar: true,
+        closeOnClick: true,
+        autoClose: 3000,
+      });
+    } else {
+      toast.warn(`Application Status can't be changed, Please call the admin`, {
         hideProgressBar: true,
         closeOnClick: true,
         autoClose: 3000,
