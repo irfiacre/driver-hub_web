@@ -29,30 +29,22 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
   };
 
   return (
-    <BaseCard className="px-10 py-5">
-      <SearchableInput
-        inputID="sidebarSearch"
-        value={searchText}
-        onInputChange={handleSidebarSearch}
-        inputClassName="rounded-md"
-      />
-      <div className="py-2.5 text-primary text-base">Applications</div>
-      <hr />
+    <div className="px-10 py-5">
+      <div className="py-5">
+        <SearchableInput
+          inputID="sidebarSearch"
+          value={searchText}
+          onInputChange={handleSidebarSearch}
+          inputClassName="rounded-md"
+        />
+      </div>
+
       <div>
         {tableData.map((item) => (
-          <div key={item.id}>
+          <BaseCard key={item.id}>
             <Link href={`/applications/${item.id}`}>
               <div className="flex flex-row align-middle items-center py-2.5 px-1.5 gap-3.5 cursor-pointer hover:bg-primary_3">
                 <div className="overflow-hidden">
-                  {/* <Image
-                    className="rounded-full cursor-pointer"
-                    loader={() => item.baseInformation.passportPhotoUrl}
-                    src={item.baseInformation.passportPhotoUrl}
-                    alt="Rounded avatar"
-                    height={80}
-                    width={80}
-                    unoptimized
-                  /> */}
                   <img
                     src={item.baseInformation.passportPhotoUrl}
                     alt="Thumbnail"
@@ -89,16 +81,11 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
                 </div>
                 <div></div>
               </div>
-
-              <hr />
             </Link>
-          </div>
+          </BaseCard>
         ))}
       </div>
-      {/* <div className="w-full py-10">
-        <Pagination prevPage={1} currentPage={1} nextPage={3} totalPages={5} />
-      </div> */}
-    </BaseCard>
+    </div>
   );
 };
 

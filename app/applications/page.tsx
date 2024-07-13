@@ -5,6 +5,7 @@ import isAuth from "@/src/components/isAuth";
 import { subscribeToCollection } from "@/services/firebase/helpers";
 import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
 import Loading from "@/src/components/LoadingComponent";
+import TableFilterWrapper from "@/src/components/TableFilterWrapper";
 
 const Applications = () => {
   const [data, setData] = useState<any>([]);
@@ -17,7 +18,13 @@ const Applications = () => {
 
   return (
     <div className="flex flex-col gap-3">
-      {!data[0] ? <Loading /> : <SearchableTable data={data} />}
+      {!data[0] ? (
+        <Loading />
+      ) : (
+        <TableFilterWrapper title="Applications">
+          <SearchableTable data={data} />
+        </TableFilterWrapper>
+      )}
     </div>
   );
 };
