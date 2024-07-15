@@ -60,6 +60,7 @@ const AddMaterial = ({
       duration: state.duration
         ? state.duration
         : Math.round((Math.random() * 10) / 2),
+      completed: false,
     });
   };
   const handleGotDownloadUrl = (metaData: any) => {

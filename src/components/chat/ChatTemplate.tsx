@@ -27,7 +27,7 @@ const ChatTemplate = ({
 
   return (
     <div>
-      <div className=" py-3.5 flex flex-row justify-start items-center gap-5">
+      <div className="py-3.5 flex flex-row justify-start items-center gap-5">
         <div>
           <Image
             className="rounded-full w-16 bg-textLightColor border border-borderColorLight"
@@ -48,7 +48,7 @@ const ChatTemplate = ({
         </div>
       </div>
       <hr />
-      <div className="py-1.5">{children}</div>
+      <div className="py-1.5 space-y-3 h-[50vh] overflow-auto">{children}</div>
       <hr />
       <div className="py-1.5">
         <ChatInput

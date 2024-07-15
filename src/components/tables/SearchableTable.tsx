@@ -16,7 +16,7 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
       data.filter((item) =>
         searchText.trim() === ""
           ? item
-          : item.applicant
+          : `${item.applicant.firstName} ${item.applicant.lastName}`
               .toLowerCase()
               .includes(searchText.trim().toLowerCase())
       )
