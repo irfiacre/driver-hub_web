@@ -79,7 +79,7 @@ const Pagination = ({
         type="button"
         onClick={() => handleClickNext()}
       >
-        Next{" "}
+        Next{"  "}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
