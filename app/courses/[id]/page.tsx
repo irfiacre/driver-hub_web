@@ -153,9 +153,9 @@ const CourseDetails = () => {
           </div>
         )}
       </BaseCard>
-      {/* <BaseCard className="my-2 px-10 py-10">
+      <BaseCard className="my-2 px-10 py-10">
         <span> {"// I WILL ADD QUIZ addition"}</span>
-      </BaseCard> */}
+      </BaseCard>
     </div>
   );
 };
