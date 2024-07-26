@@ -57,7 +57,7 @@ const CourseDetails = () => {
       toast.success("Material Added Successfully", {
         hideProgressBar: true,
         closeOnClick: true,
-        autoClose: 3000,
+        autoClose: 5000,
       });
     }
   };
