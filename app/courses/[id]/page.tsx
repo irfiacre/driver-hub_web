@@ -62,7 +62,6 @@ const CourseDetails = () => {
     }
   };
   const handleMaterialClick = (material: any) => setSelectedMaterial(material);
-
   const handleSecondaryBtn = async (condition: string) => {
     switch (condition) {
       case "delete":
