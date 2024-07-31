@@ -1,30 +1,19 @@
 "use client";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useCallback, useLayoutEffect, useState } from "react";
 import BaseCard from "../../../components/cards/BaseCard";
 import ChatPartner from "../../../components/chat/ChatPartner";
 import ChatTemplate from "../../../components/chat/ChatTemplate";
 import ChatBubble from "../../../components/chat/ChatBubble";
-import { subscribeToCollection } from "@/services/firebase/helpers";
-import {
-  APPLICATIONS_COLLECTION,
-  CHAT_COLLECTION,
-} from "@/constants/collectionNames";
+import { CHAT_COLLECTION } from "@/constants/collectionNames";
 import {
   addDoc,
   collection,
-  Firestore,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
 } from "firebase/firestore";
 import { database } from "@/services/firebase/storage";
-import { randomUUID } from "crypto";
 import { uuidv4 } from "@firebase/util";
 
 const ChatPage = ({
@@ -85,7 +74,6 @@ const ChatPage = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(messages);
 
   return (
     <div className="w-full py-10 flex flex-row max-md:flex-col gap-2 text-textDarkColor max-h-svh">
