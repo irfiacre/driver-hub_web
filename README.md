@@ -1,6 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Driver Hub
 
-## Getting Started
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bf035d38-e671-489d-8e86-4314d37cab0e/deploy-status)](https://app.netlify.com/sites/driverhub/deploys)
+
+#### Getting Started
 
 First, run the development server:
 
