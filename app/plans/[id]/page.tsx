@@ -9,6 +9,7 @@ import SearchableInput from "@/src/components/inputs/SearchInput";
 import { formatDate } from "@/util/helpers";
 import isAuth from "@/src/components/isAuth";
 import {
+  findDocEntryByField,
   getCollectionEntries,
   subscribeToDocument,
   updateDocEntry,
@@ -52,6 +53,13 @@ const OnboardingPlan = ({ user }: { user: any }) => {
   useEffect(() => {
     let result: any = [];
     (async () => {
+      // Finding plan info in firebase for the initialization
+      const planInitialData = await findDocEntryByField(
+        PLANS_COLLECTION,
+        "id",
+        params.id.toLocaleString()
+      );
+      setPlan(planInitialData);
       result = await getCollectionEntries(COURSES_COLLECTION);
       setFirebaseCourses(result);
     })();
@@ -69,8 +77,6 @@ const OnboardingPlan = ({ user }: { user: any }) => {
   };
 
   const handleSubmitOnboardingCourse = async (courseData: any) => {
-    console.log("------", courseData);
-
     const course = { ...courseData, completed: false };
     const ONBOARDING_COURSES = plan.onboardingPlan
       ? [...plan.onboardingPlan.courses, course]

@@ -37,7 +37,6 @@
     "typescript": "^5"
   },
   "devDependencies": {
-    "@next/swc-darwin-arm64": "^14.2.5",
     "@types/nodemailer": "^6.4.15"
   }
 }

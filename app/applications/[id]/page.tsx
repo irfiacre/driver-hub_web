@@ -6,6 +6,7 @@ import {
 } from "@/constants/collectionNames";
 import {
   changeApplicantToEmployee,
+  findDocEntryByField,
   getCollectionEntries,
   subscribeToDocument,
   updateDocEntry,
@@ -58,9 +59,18 @@ const Application = ({ user }: { user: any }) => {
   useEffect(() => {
     let result: any = [];
     (async () => {
+      // Finding application info in firebase for the initialization
+      const applicationInitialData = await findDocEntryByField(
+        APPLICATIONS_COLLECTION,
+        "id",
+        params.id.toLocaleString()
+      );
+      setApplicationInfo(applicationInitialData);
+
       result = await getCollectionEntries(COURSES_COLLECTION);
       setFirebaseCourses(result);
     })();
+
     return () =>
       subscribeToDocument(
         APPLICATIONS_COLLECTION,
