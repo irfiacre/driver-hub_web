@@ -6,6 +6,7 @@ import Chart from "@/src/components/charts/Chart";
 import React, { useEffect, useState } from "react";
 import { subscribeToCollection } from "@/services/firebase/helpers";
 import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
+import moment from "moment";
 
 const DashboardPage = () => {
   // const analytics = [
@@ -83,6 +84,16 @@ const DashboardPage = () => {
             <AnalyticsCard title={item.title} count={item.count} />
           </div>
         ))}
+      </div>
+      <div className="flex flex-row justify-between items-center">
+        <span>
+          {" "}
+          {
+            "// To add how to generate report: Once should choose a date for the report //"
+          }{" "}
+          {moment().fromNow()}
+        </span>
+        <span>GENERATE Report</span>
       </div>
       <div>
         <Chart title="Weekly Onboarding hours" />

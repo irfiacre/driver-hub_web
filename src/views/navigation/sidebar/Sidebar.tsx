@@ -40,7 +40,7 @@ export const Sidebar = () => {
       {
         title: "Employees",
         subtitle: "Track employees onboarding progress",
-        url: "applicants",
+        url: "employees",
         icon: "material-symbols:supervised-user-circle",
       },
     ],
