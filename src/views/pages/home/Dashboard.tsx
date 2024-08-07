@@ -9,25 +9,6 @@ import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
 import moment from "moment";
 
 const DashboardPage = () => {
-  // const analytics = [
-  //   {
-  //     title: "Applications",
-  //     count: 150,
-  //   },
-  //   {
-  //     title: "Accepted",
-  //     count: 121,
-  //   },
-  //   {
-  //     title: "Pending",
-  //     count: 10,
-  //   },
-  //   {
-  //     title: "Rejected",
-  //     count: 5,
-  //   },
-  // ];
-
   const moreStatistics = [
     { title: "Finished Onboarding", count: 0 },
     { title: "Currently Onboarding", count: 2 },
@@ -75,6 +56,9 @@ const DashboardPage = () => {
       count: data.filter((elt: any) => elt.status === "rejected").length,
     },
   ];
+  const generateReport = () => {
+    console.log("--------");
+  };
 
   return (
     <div className="flex flex-col gap-5">
@@ -93,7 +77,17 @@ const DashboardPage = () => {
           }{" "}
           {moment().fromNow()}
         </span>
-        <span>GENERATE Report</span>
+        <div>
+          <span>GENERATE Report</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => generateReport()}
+          className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4"
+        >
+          Add New User
+        </button>
       </div>
       <div>
         <Chart title="Weekly Onboarding hours" />
