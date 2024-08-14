@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { subscribeToCollection } from "@/services/firebase/helpers";
 import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
 import moment from "moment";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const DashboardPage = () => {
   const moreStatistics = [
@@ -77,16 +78,13 @@ const DashboardPage = () => {
           }{" "}
           {moment().fromNow()}
         </span>
-        <div>
-          <span>GENERATE Report</span>
-        </div>
-
         <button
           type="button"
           onClick={() => generateReport()}
-          className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4"
+          className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4 flex flex-row items-center justify-center"
         >
-          Add New User
+          <span className="pr-2">Generate Report</span>
+          <Icon icon="material-symbols:download" fontSize={24} />
         </button>
       </div>
       <div>
