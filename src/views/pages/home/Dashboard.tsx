@@ -6,12 +6,12 @@ import Chart from "@/src/components/charts/Chart";
 import React, { useEffect, useState, useRef } from "react";
 import { subscribeToCollection } from "@/services/firebase/helpers";
 import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
-import moment from "moment";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import ReportTemplate from "@/src/components/report/Template";
 import Datepicker from "react-tailwindcss-datepicker";
+import { PulseLoader } from "react-spinners";
 
 const DashboardPage = () => {
   const moreStatistics = [
@@ -131,7 +131,19 @@ const DashboardPage = () => {
             onClick={() => generateReport()}
             className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4 flex flex-row items-center justify-center"
           >
-            <span className="pr-2">Generate Report</span>
+            {reporting ? (
+              <PulseLoader
+                color={"#ffffff"}
+                loading={reporting}
+                size={10}
+                cssOverride={{ width: "100%" }}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+                speedMultiplier={0.5}
+              />
+            ) : (
+              <span className="pr-2">Generate Report</span>
+            )}
             <Icon icon="material-symbols:download" fontSize={24} />
           </button>
         </div>
@@ -156,18 +168,16 @@ const DashboardPage = () => {
         ))}
       </BaseCard>
       {user?.role === "admin" && <UsersTable data={allStaff} />}
-      {reporting && (
-        <div
-          style={{
-            visibility: "hidden",
-          }}
-          ref={componentRef}
-        >
-          <ReportTemplate
-            period={`${dateRange.startDate} To ${dateRange.endDate}`}
-          />
-        </div>
-      )}
+      <div
+        style={{
+          visibility: "hidden",
+        }}
+        ref={componentRef}
+      >
+        <ReportTemplate
+          period={`${dateRange.startDate} To ${dateRange.endDate}`}
+        />
+      </div>
     </div>
   );
 };

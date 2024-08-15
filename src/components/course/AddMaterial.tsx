@@ -5,9 +5,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "@/styles/reactquil.css";
 import { Icon } from "@iconify/react";
-import ProgressBar from "../ProgressBar";
 import { uploadFile } from "@/services/firebase/storage";
-import { generateFileName, generateId } from "@/util/helpers";
+import { generateFileName } from "@/util/helpers";
 
 interface CreateCourseMaterialState {
   title: string;

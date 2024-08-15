@@ -18,8 +18,8 @@ const ConstructTable = ({
 }) => (
   <div>
     <div className="py-2.5 text-textLightColor text-base font-medium flex flex-row align-middle items-center px-1.5 gap-3.5 cursor-pointer bg-backgroundColor">
-      {header.map((item: any) => (
-        <span key={item} className="w-full capitalize">
+      {header.map((item: any, index: number) => (
+        <span key={index} className="w-full capitalize">
           {item}
         </span>
       ))}
@@ -29,8 +29,8 @@ const ConstructTable = ({
       {tableData.map((item: any, index: number) => (
         <div key={index}>
           <div className="flex flex-row align-middle items-center py-2.5 px-1.5 gap-1.5 cursor-pointer hover:bg-backgroundColor">
-            {item.map((val: any) => (
-              <span key={item} className="w-full capitalize px-2">
+            {item.map((val: any, index: number) => (
+              <span key={index} className="w-full capitalize px-2">
                 {val}
               </span>
             ))}
@@ -61,10 +61,7 @@ const ReportTemplate = React.forwardRef<HTMLDivElement, ReportTemplateProps>(
                 Analytics Report
               </h1>
             </div>
-            <p className="text-borderColorLight">
-              Period: {period}
-              {/* {new Date().toLocaleString()} */}
-            </p>
+            <p className="text-borderColorLight">Period: {period}</p>
           </section>
           <hr />
           <section>
