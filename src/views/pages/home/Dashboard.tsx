@@ -3,11 +3,15 @@ import AnalyticsCard from "@/src/components/cards/AnalyticsCard";
 import BaseCard from "@/src/components/cards/BaseCard";
 import UsersTable from "@/src/components/tables/UsersTable";
 import Chart from "@/src/components/charts/Chart";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { subscribeToCollection } from "@/services/firebase/helpers";
 import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
 import moment from "moment";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import ReportTemplate from "@/src/components/report/Template";
+import Datepicker from "react-tailwindcss-datepicker";
 
 const DashboardPage = () => {
   const moreStatistics = [
@@ -19,6 +23,11 @@ const DashboardPage = () => {
 
   const [allStaff, setStaff] = useState([]);
   const [user, setUser] = useState<any>(null);
+  const [reporting, setReporting] = useState(false);
+  const [dateRange, setDateRange] = useState<any>({
+    startDate: new Date().setMonth(new Date().getMonth() - 1),
+    endDate: new Date(),
+  });
 
   useEffect(() => {
     const userStr = localStorage.getItem("user");
@@ -57,8 +66,42 @@ const DashboardPage = () => {
       count: data.filter((elt: any) => elt.status === "rejected").length,
     },
   ];
+  const componentRef = useRef<HTMLDivElement>(null);
+
   const generateReport = () => {
-    console.log("--------");
+    setReporting(true);
+    const input = componentRef.current;
+    if (input) {
+      input.style.visibility = "visible";
+      html2canvas(input, { scale: 5 }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
+        const imgWidth = 210;
+        const pageHeight = 297;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        if (imgHeight > pageHeight) {
+          let position = 0;
+          for (let i = 0; i <= 3; i++) {
+            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            position -= pageHeight;
+            if (heightLeft > 0) {
+              pdf.addPage();
+            }
+          }
+        } else {
+          pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        }
+        pdf.save(
+          `AnalyticsReport-${dateRange.startDate}-${dateRange.endDate}.pdf`
+        );
+        input.style.visibility = "hidden";
+      });
+    }
+    setReporting(false);
   };
 
   return (
@@ -71,21 +114,27 @@ const DashboardPage = () => {
         ))}
       </div>
       <div className="flex flex-row justify-between items-center">
-        <span>
-          {" "}
-          {
-            "// To add how to generate report: Once should choose a date for the report //"
-          }{" "}
-          {moment().fromNow()}
-        </span>
-        <button
-          type="button"
-          onClick={() => generateReport()}
-          className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4 flex flex-row items-center justify-center"
-        >
-          <span className="pr-2">Generate Report</span>
-          <Icon icon="material-symbols:download" fontSize={24} />
-        </button>
+        <div className="w-2/5">
+          <Datepicker
+            value={dateRange}
+            onChange={(val) => setDateRange(val)}
+            primaryColor={"rose"}
+            showShortcuts={true}
+            showFooter
+            placeholder="Report Date Range"
+            maxDate={new Date()}
+          />
+        </div>
+        <div>
+          <button
+            type="button"
+            onClick={() => generateReport()}
+            className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4 flex flex-row items-center justify-center"
+          >
+            <span className="pr-2">Generate Report</span>
+            <Icon icon="material-symbols:download" fontSize={24} />
+          </button>
+        </div>
       </div>
       <div>
         <Chart title="Weekly Onboarding hours" />
@@ -107,6 +156,18 @@ const DashboardPage = () => {
         ))}
       </BaseCard>
       {user?.role === "admin" && <UsersTable data={allStaff} />}
+      {reporting && (
+        <div
+          style={{
+            visibility: "hidden",
+          }}
+          ref={componentRef}
+        >
+          <ReportTemplate
+            period={`${dateRange.startDate} To ${dateRange.endDate}`}
+          />
+        </div>
+      )}
     </div>
   );
 };

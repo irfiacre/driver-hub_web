@@ -2,6 +2,7 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import { primaryColor } from "@/constants/colors";
 import { Poppins } from "next/font/google";
+import LogoIcon from "./LogoIcon";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,14 +23,7 @@ const LogoComponent = ({
   };
   return (
     <div className="flex justify-center align-middle items-center gap-2">
-      <div className="bg-primary p-2 rounded-md">
-        <Icon
-          icon="healthicons:truck-driver"
-          fontSize={logoParams.iconSize}
-          className="text-white"
-        />
-      </div>
-
+      <LogoIcon size={logoParams.iconSize} />
       <div>
         <h1
           className="font-bold text-primary"
