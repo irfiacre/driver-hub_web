@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import BaseInput from "../inputs/BaseInput";
 import Image from "next/image";
-import Chat from "@/app/chats/page";
+import Chat from "@/app/(admin)/chats/page";
 import ChatInput from "../inputs/ChatInput";
 
 interface ChatTemplateProps {
