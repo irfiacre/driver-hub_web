@@ -59,16 +59,26 @@ const TopSection = () => {
             Want to join as a driver ? Download our App here
           </p>
           <div className="flex flex-row items-center justify-start gap-10">
-            <Icon
-              icon="iconoir:app-store-solid"
-              fontSize={50}
-              className="text-primary cursor-pointer"
-            />
-            <Icon
-              icon="simple-icons:googleplay"
-              fontSize={40}
-              className="text-primary cursor-pointer"
-            />
+            <a
+              href="https://expo.dev/accounts/irfiacre/projects/driverhub"
+              target="_blank"
+            >
+              <Icon
+                icon="iconoir:app-store-solid"
+                fontSize={50}
+                className="text-primary cursor-pointer"
+              />
+            </a>
+            <a
+              href="https://expo.dev/accounts/irfiacre/projects/driverhub"
+              target="_blank"
+            >
+              <Icon
+                icon="simple-icons:googleplay"
+                fontSize={40}
+                className="text-primary cursor-pointer"
+              />
+            </a>
           </div>
         </div>
         <div className="max-md:pt-10">
