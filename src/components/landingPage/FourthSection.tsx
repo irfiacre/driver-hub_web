@@ -23,16 +23,16 @@ const FourthSection = () => {
     },
   ];
   return (
-    <section className="px-36 py-10 align-middle space-y-10 bg-white">
+    <section className="px-36 py-10 align-middle space-y-10 bg-white max-md:px-5">
       <div className="space-y-5 text-center">
-        <span className="text-textDarkColor text-5xl font-normal">
+        <span className="text-textDarkColor text-5xl font-normal max-md:text-3xl">
           Testimonies
         </span>
       </div>
-      <div className="flex flex-row items-center justify-between gap-10">
+      <div className="flex flex-row items-center justify-between gap-10 max-md:flex-wrap">
         <div className="w-full">
           <Image
-            className="rounded-md w-80 bg-textLightColor"
+            className="rounded-md w-80 bg-textLightColor max-md:w-50"
             loader={() => testimonies[0].image}
             src={testimonies[0].image}
             alt={`${testimonies[0].name}`}
@@ -42,7 +42,9 @@ const FourthSection = () => {
           />
         </div>
         <div className="space-y-5">
-          <p className="text-textDarkColor text-xl">{testimonies[0].text}</p>
+          <p className="text-textDarkColor text-xl max-md:text-justify">
+            {testimonies[0].text}
+          </p>
           <p className="text-primary text-2xl">{testimonies[0].name}</p>
           <p className="text-textLightColor text-sm">Joined since in 2023</p>
         </div>

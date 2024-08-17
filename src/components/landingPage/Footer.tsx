@@ -13,7 +13,7 @@ const Footer = () => {
   const [email, setEmail] = useState("");
 
   return (
-    <footer className="px-36 py-10 bg-footerBackground flex flex-row items-center justify-between">
+    <footer className="px-36 py-10 bg-footerBackground flex flex-row items-center justify-between max-md:px-5 max-md:flex-wrap max-md:space-y-10">
       <div className="space-y-10">
         <div className="flex items-center">
           <LogoIcon color="#263238" size={40} />
@@ -39,8 +39,8 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <div className="w-2/4 flex flex-row items-start justify-between gap-5">
-        <div className="space-y-4">
+      <div className="w-2/4 flex flex-row items-start justify-between gap-5 max-md:flex-wrap max-md:space-y-10 max-md:pl-2">
+        <div className="space-y-4 max-md:w-full">
           <p className="text-white text-xl font-semibold">Support</p>
           <p>
             <a
@@ -77,7 +77,7 @@ const Footer = () => {
             </a>
           </p>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-4 max-md:w-full">
           <p className="text-white text-xl">Stay up to date</p>
           <div>
             <label

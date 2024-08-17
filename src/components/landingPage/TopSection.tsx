@@ -21,7 +21,7 @@ const TopSection = () => {
   };
 
   return (
-    <section className="px-36 py-5 space-y-5 bg-primary/5">
+    <section className="px-36 py-5 space-y-5 bg-primary/5 max-md:px-5">
       <div className="flex flex-row items-center justify-between">
         <div>
           <LogoIcon size={26} />
@@ -44,14 +44,14 @@ const TopSection = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-between pt-24">
+      <div className="flex flex-row items-center justify-between pt-24 max-md:flex-wrap">
         <div className="space-y-5">
           <div>
-            <span className="text-textDarkColor text-5xl font-semibold">
+            <span className="text-textDarkColor text-8xl font-semibold max-md:text-5xl">
               Welcome to
             </span>
             <br />
-            <span className="text-primary text-5xl font-semibold">
+            <span className="text-primary text-7xl font-semibold max-md:text-4xl">
               Driver Hub
             </span>
           </div>
@@ -71,11 +71,11 @@ const TopSection = () => {
             />
           </div>
         </div>
-        <div>
+        <div className="max-md:pt-10">
           <Lottie
             animationData={animationData}
-            height={400}
-            width={400}
+            height={"100%"}
+            width={"100%"}
             loop={true}
           />
         </div>

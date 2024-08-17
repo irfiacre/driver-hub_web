@@ -23,14 +23,14 @@ const SecondSection = () => {
     },
   ];
   return (
-    <section className="px-36 py-10 align-middle">
+    <section className="px-36 py-10 align-middle max-md:px-5">
       <div className="">
         <div className="space-y-5 text-center">
-          <span className="text-textDarkColor text-5xl font-normal">
+          <span className="text-textDarkColor text-5xl font-normal max-md:text-3xl">
             Why Join
           </span>
           {"  "}
-          <span className="text-textDarkColor text-5xl font-semibold">
+          <span className="text-textDarkColor text-5xl font-semibold max-md:text-3xl">
             Driver Hub?
           </span>
           <p className="text-textLightColor">
@@ -39,7 +39,7 @@ const SecondSection = () => {
           </p>
         </div>
 
-        <div className="flex flex-row items-center justify-around gap-10 pt-10">
+        <div className="flex flex-row items-center justify-around gap-10 pt-10 max-md:flex-wrap">
           {cardContent.map((item) => (
             <BaseCard
               key={item.title}

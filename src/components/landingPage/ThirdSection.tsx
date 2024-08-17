@@ -13,19 +13,19 @@ const ThirdSection = () => {
     },
   ];
   return (
-    <section className="px-36 py-16 flex flex-row items-center flex-wrap justify-between bg-backgroundColor3/10">
+    <section className="px-36 py-16 flex flex-row items-center  justify-between bg-backgroundColor3/10 max-md:px-5 max-md:flex-wrap max-md:space-y-10">
       <div>
-        <p className="text-textDarkColor text-4xl font-medium">
+        <p className="text-textDarkColor text-4xl font-medium max-md:text-3xl">
           Helping a local
         </p>
-        <p className="text-primary text-4xl font-medium">
+        <p className="text-primary text-4xl font-medium max-md:text-3xl">
           Industry reinvent itself
         </p>
         <p className="text-textLightColor pt-5">
           We reached here with our hard work and dedication!
         </p>
       </div>
-      <div className="w-2/4 grid grid-cols-2 gap-4">
+      <div className="w-2/4 grid grid-cols-2 gap-4 max-md:w-full">
         {metrics.map((item) => (
           <div key={item.title} className="flex flex-row items-center gap-8">
             <div>
@@ -36,7 +36,7 @@ const ThirdSection = () => {
               />
             </div>
             <div>
-              <p className="text-textDarkColor text-2xl font-bold">
+              <p className="text-textDarkColor text-2xl font-bold max-md:text-xl">
                 {item.amount}
               </p>
               <p className="text-textLightColor">{item.title}</p>
