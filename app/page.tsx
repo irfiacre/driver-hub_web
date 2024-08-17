@@ -1,4 +1,5 @@
 import Footer from "@/src/components/landingPage/Footer";
+import FourthSection from "@/src/components/landingPage/FourthSection";
 import SecondSection from "@/src/components/landingPage/SecondSection";
 import ThirdSection from "@/src/components/landingPage/ThirdSection";
 import TopSection from "@/src/components/landingPage/TopSection";
@@ -15,6 +16,7 @@ const LandingPage = () => {
       <TopSection />
       <SecondSection />
       <ThirdSection />
+      <FourthSection />
       <Footer />
     </div>
   );
