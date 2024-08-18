@@ -39,7 +39,7 @@ const SearchableTable = ({ data }: { data: Array<any> }) => {
         />
       </div>
 
-      <div>
+      <div className="space-y-2">
         {tableData.map((item) => (
           <BaseCard key={item.id}>
             <Link href={`/applications/${item.id}`}>

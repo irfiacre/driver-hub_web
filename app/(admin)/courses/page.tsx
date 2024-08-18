@@ -10,11 +10,14 @@ import { COURSES_COLLECTION } from "@/constants/collectionNames";
 import Loading from "@/src/components/LoadingComponent";
 
 const Courses = () => {
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any>([]);
 
   const initialFindApplications = async () => {
+    setLoading(true);
     const result = await getCollectionEntries(COURSES_COLLECTION);
     setData(result);
+    setLoading(false);
   };
 
   const handleOnUpdateData = (newChanges: any) =>
@@ -25,7 +28,7 @@ const Courses = () => {
     return () => subscribeToCollection(COURSES_COLLECTION, handleOnUpdateData);
   }, []);
 
-  return <div>{!data[0] ? <Loading /> : <CoursesTable data={data} />}</div>;
+  return <div>{loading ? <Loading /> : <CoursesTable data={data} />}</div>;
 };
 
 export default isAuth(Courses);

@@ -86,7 +86,7 @@ const ChatPage = ({
             >
               <ChatPartner
                 key={employee.userId}
-                photoUrl={employee.passportPhotoUrl}
+                photoUrl={employee.photoUrl}
                 name={`${employee.firstName} ${employee.lastName}`}
                 lastMessage=""
               />
@@ -98,7 +98,7 @@ const ChatPage = ({
 
       <BaseCard className="w-full px-10 py-5">
         <ChatTemplate
-          photoUrl={selectedChatPartner?.passportPhotoUrl}
+          photoUrl={selectedChatPartner?.photoUrl}
           name={`${selectedChatPartner.firstName} ${selectedChatPartner.lastName}`}
           handleSendMessage={onSend}
         >

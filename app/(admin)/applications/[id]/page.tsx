@@ -273,15 +273,6 @@ const Application = ({ user }: { user: any }) => {
                 />
               ))}
             </div>
-            <div className="text-center py-10">
-              <button
-                type="button"
-                onClick={handleOpenChat}
-                className="-ml-16 px-16 h-16 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-xl text-base text-center py-3"
-              >
-                Open Chat
-              </button>
-            </div>
           </div>
           <div className="w-full md:px-10 max-md:pt-10">
             <h1 className="text-xl font-semibold text-textLightColor pb-5">

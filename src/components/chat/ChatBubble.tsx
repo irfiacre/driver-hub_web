@@ -15,8 +15,6 @@ const ChatBubble = ({
   isSent?: boolean;
   time?: string;
 }) => {
-  console.log("----", isSent);
-
   return (
     <div>
       <div

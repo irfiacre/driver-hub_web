@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { PulseLoader } from "react-spinners";
 import BaseInput from "../inputs/BaseInput";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "@/styles/reactquil.css";
 import { Icon } from "@iconify/react";
 import { uploadFile } from "@/services/firebase/storage";
 import { generateFileName } from "@/util/helpers";
+
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface CreateCourseMaterialState {
   title: string;

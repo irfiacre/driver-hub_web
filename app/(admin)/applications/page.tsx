@@ -25,9 +25,6 @@ const Applications = () => {
     return () =>
       subscribeToCollection(APPLICATIONS_COLLECTION, handleOnUpdateData);
   }, []);
-  console.log("----data----");
-  console.log(data);
-  console.log("----data----");
 
   return (
     <div className="flex flex-col gap-3">

@@ -250,7 +250,7 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
         ))}
       </div>
       <div className="w-full py-10">
-        <Pagination prevPage={1} currentPage={2} nextPage={3} totalPages={5} />
+        <Pagination prevPage={1} currentPage={1} nextPage={1} totalPages={1} />
       </div>
     </BaseCard>
   );
