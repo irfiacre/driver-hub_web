@@ -8,12 +8,16 @@ import Link from "next/link";
 import BaseModel from "../models/BaseModel";
 import CreateOnboardingPlan from "@/src/views/forms/CreateOnboardingPlan";
 import { Icon } from "@iconify/react";
-import { COURSES_COLLECTION } from "@/constants/collectionNames";
+import {
+  COURSES_COLLECTION,
+  RECOMMENDED_COURSES_COLLECTION,
+} from "@/constants/collectionNames";
 import { toast } from "react-toastify";
 import { generateId } from "@/util/helpers";
 import {
   createDocEntry,
   deleteDocEntryById,
+  findDocEntryByField,
   updateDocEntry,
 } from "@/services/firebase/helpers";
 
@@ -105,6 +109,33 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
     const deleted = await deleteDocEntryById(COURSES_COLLECTION, course.id);
     if (deleted) {
       toast.success(`${course.title} is Deleted`, {
+        hideProgressBar: true,
+        closeOnClick: true,
+        autoClose: 3000,
+      });
+    }
+  };
+  const handleRecommendCourse = async (course: any) => {
+    const findRecommended = await await findDocEntryByField(
+      RECOMMENDED_COURSES_COLLECTION,
+      "id",
+      course.id
+    );
+    if (findRecommended) return;
+
+    const courseFormat = {
+      ...course,
+      recommended: true,
+    };
+    await updateDocEntry(COURSES_COLLECTION, courseFormat.id, courseFormat);
+
+    const recommended = await createDocEntry(
+      RECOMMENDED_COURSES_COLLECTION,
+      course
+    );
+
+    if (recommended) {
+      toast.success(`Course "${course.title}" Is successfully recommended.`, {
         hideProgressBar: true,
         closeOnClick: true,
         autoClose: 3000,
@@ -203,6 +234,14 @@ const CoursesTable = ({ data }: { data: Array<any> }) => {
                   onClick={() => handleDelete(item)}
                 >
                   <Icon icon="mdi:delete" fontSize={20} />
+                </button>
+                <button
+                  className="inline-flex self-center items-center p-2 -mt-5 text-sm font-light text-center text-textLightColor bg-inherit rounded-full hover:underline disabled:text-successGreen"
+                  type="button"
+                  onClick={() => handleRecommendCourse(item)}
+                  disabled={item.recommended}
+                >
+                  {item.recommended ? "Recommended" : "Recommend"}
                 </button>
               </div>
             </div>
