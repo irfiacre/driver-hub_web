@@ -141,7 +141,7 @@ const OnboardingPlan = ({ user }: { user: any }) => {
                 Courses
               </h1>
               <div>
-                {plan.onboardingPlan.courses.map((course: any) => (
+                {plan.onboardingPlan?.courses.map((course: any) => (
                   <div key={course.title}>
                     <Course
                       title={course.title}

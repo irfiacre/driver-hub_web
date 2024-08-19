@@ -74,6 +74,7 @@ const ChatPage = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(messages);
 
   return (
     <div className="w-full py-10 flex flex-row max-md:flex-col gap-2 text-textDarkColor max-h-svh">
@@ -88,7 +89,7 @@ const ChatPage = ({
                 key={employee.userId}
                 photoUrl={employee.photoUrl}
                 name={`${employee.firstName} ${employee.lastName}`}
-                lastMessage=""
+                lastMessage={messages[messages.length - 1]?.text || ""}
               />
               <hr />
             </div>

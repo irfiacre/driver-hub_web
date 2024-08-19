@@ -30,7 +30,7 @@ const ChatTemplate = ({
       <div className="py-3.5 flex flex-row justify-start items-center gap-5">
         <div>
           <Image
-            className="rounded-full w-16 bg-textLightColor border border-borderColorLight"
+            className="rounded-full w-20 h-20 object-cover bg-textLightColor border border-borderColorLight"
             loader={() => photoUrl}
             src={photoUrl}
             alt="Applicant photo"

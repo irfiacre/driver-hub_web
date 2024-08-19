@@ -4,7 +4,10 @@ import BaseCard from "@/src/components/cards/BaseCard";
 import UsersTable from "@/src/components/tables/UsersTable";
 import Chart from "@/src/components/charts/Chart";
 import React, { useEffect, useState, useRef } from "react";
-import { subscribeToCollection } from "@/services/firebase/helpers";
+import {
+  getCollectionEntries,
+  subscribeToCollection,
+} from "@/services/firebase/helpers";
 import { APPLICATIONS_COLLECTION } from "@/constants/collectionNames";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import jsPDF from "jspdf";
@@ -23,11 +26,19 @@ const DashboardPage = () => {
 
   const [allStaff, setStaff] = useState([]);
   const [user, setUser] = useState<any>(null);
-  const [reporting, setReporting] = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [dateRange, setDateRange] = useState<any>({
     startDate: new Date().setMonth(new Date().getMonth() - 1),
     endDate: new Date(),
   });
+  const [loading, setLoading] = useState(false);
+
+  const initialFindApplications = async () => {
+    setLoading(true);
+    const result = await getCollectionEntries(APPLICATIONS_COLLECTION);
+    setData(result);
+    setLoading(false);
+  };
 
   useEffect(() => {
     const userStr = localStorage.getItem("user");
@@ -43,7 +54,9 @@ const DashboardPage = () => {
   const [data, setData] = useState<any>([]);
   const handleOnUpdateData = (newChanges: any) =>
     setData((prevData: any) => [...prevData, newChanges]);
+
   useEffect(() => {
+    initialFindApplications();
     return () =>
       subscribeToCollection(APPLICATIONS_COLLECTION, handleOnUpdateData);
   }, []);
@@ -69,7 +82,7 @@ const DashboardPage = () => {
   const componentRef = useRef<HTMLDivElement>(null);
 
   const generateReport = () => {
-    setReporting(true);
+    setGenerating(true);
     const input = componentRef.current;
     if (input) {
       input.style.visibility = "visible";
@@ -101,7 +114,7 @@ const DashboardPage = () => {
         input.style.visibility = "hidden";
       });
     }
-    setReporting(false);
+    setGenerating(false);
   };
 
   return (
@@ -131,10 +144,10 @@ const DashboardPage = () => {
             onClick={() => generateReport()}
             className="h-12 text-white bg-primary hover:bg-primaryDark focus:outline-none font-medium rounded-lg text-md text-center px-4 flex flex-row items-center justify-center"
           >
-            {reporting ? (
+            {generating ? (
               <PulseLoader
                 color={"#ffffff"}
-                loading={reporting}
+                loading={generating}
                 size={10}
                 cssOverride={{ width: "100%" }}
                 aria-label="Loading Spinner"

@@ -149,49 +149,53 @@ const OnboardingPlansTable = ({ data }: { data: Array<any> }) => {
       </div>
       <hr />
       <div>
-        {tableData.map((item) => (
-          <div key={item.applicant}>
-            <div className="flex flex-row align-middle items-center py-2.5 px-1.5 gap-1.5 cursor-pointer hover:bg-backgroundColor">
-              <div className="w-full">
-                <Link href={`/plans/${item.id}`}>
-                  <span>{item.title}</span>
-                </Link>
+        {tableData.map((item) => {
+          console.log("========", item.onboardingPlan);
+
+          return (
+            <div key={item.applicant}>
+              <div className="flex flex-row align-middle items-center py-2.5 px-1.5 gap-1.5 cursor-pointer hover:bg-backgroundColor">
+                <div className="w-full">
+                  <Link href={`/plans/${item.id}`}>
+                    <span>{item.title}</span>
+                  </Link>
+                </div>
+                <div className="w-2/4">
+                  <Link href={`/plans/${item.id}`}>
+                    <span>{item.onboardingPlan?.courses.length || 0}</span>
+                  </Link>
+                </div>
+                <div className="text-sm w-full">
+                  <Link href={`/plans/${item.id}`}>
+                    <span className="text-textLightColor font-light">
+                      {item.description.substring(0, 50)}
+                    </span>
+                  </Link>
+                </div>
+                <div className="w-2/4">
+                  <button
+                    className="inline-flex self-center items-center p-2 text-sm font-medium text-center text-textLightColor bg-inherit rounded-full hover:bg-textDarkColor hover:text-white focus:outline-none"
+                    type="button"
+                    onClick={() => handleEditPlan(item)}
+                  >
+                    <Icon icon="tabler:edit" fontSize={20} />
+                  </button>{" "}
+                  <button
+                    className="inline-flex self-center items-center p-2 text-sm font-medium text-center text-red-600 bg-inherit rounded-full hover:bg-red-600 hover:text-white focus:outline-none"
+                    type="button"
+                    onClick={() => handleDelete(item)}
+                  >
+                    <Icon icon="mdi:delete" fontSize={20} />
+                  </button>
+                </div>
               </div>
-              <div className="w-2/4">
-                <Link href={`/plans/${item.id}`}>
-                  <span>{item.courses.length}</span>
-                </Link>
-              </div>
-              <div className="text-sm w-full">
-                <Link href={`/plans/${item.id}`}>
-                  <span className="text-textLightColor font-light">
-                    {item.description.substring(0, 50)}
-                  </span>
-                </Link>
-              </div>
-              <div className="w-2/4">
-                <button
-                  className="inline-flex self-center items-center p-2 text-sm font-medium text-center text-textLightColor bg-inherit rounded-full hover:bg-textDarkColor hover:text-white focus:outline-none"
-                  type="button"
-                  onClick={() => handleEditPlan(item)}
-                >
-                  <Icon icon="tabler:edit" fontSize={20} />
-                </button>{" "}
-                <button
-                  className="inline-flex self-center items-center p-2 text-sm font-medium text-center text-red-600 bg-inherit rounded-full hover:bg-red-600 hover:text-white focus:outline-none"
-                  type="button"
-                  onClick={() => handleDelete(item)}
-                >
-                  <Icon icon="mdi:delete" fontSize={20} />
-                </button>
-              </div>
+              <hr />
             </div>
-            <hr />
-          </div>
-        ))}
+          );
+        })}
       </div>
       <div className="w-full py-10">
-        <Pagination prevPage={1} currentPage={2} nextPage={3} totalPages={5} />
+        <Pagination prevPage={1} currentPage={1} nextPage={3} totalPages={1} />
       </div>
     </BaseCard>
   );
