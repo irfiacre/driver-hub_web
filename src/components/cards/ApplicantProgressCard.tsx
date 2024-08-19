@@ -25,9 +25,9 @@ const ApplicantProgressCard = ({
             <img
               src={photoUrl}
               alt="Thumbnail"
-              height={"100px"}
-              width={"100px"}
-              className="rounded-full bg-textLightColor border border-borderColorLight object-cover"
+              height={100}
+              width={100}
+              className="rounded-full bg-textLightColor border border-borderColorLight object-cover w-24 h-24"
             />
           </div>
           <div>
@@ -53,9 +53,9 @@ const ApplicantProgressCard = ({
               duration={
                 course.duration
                   ? course.duration
-                  : Math.round(Math.random() * 50)
+                  : Math.round(Math.random() * 5)
               }
-              progress={course.progress}
+              progress={course.completed ? 100 : ""}
             />
             <hr />
           </div>

@@ -10,7 +10,7 @@ const Course = ({
 }: {
   title: String;
   duration: number;
-  progress?: number;
+  progress?: any;
   hasAttachement?: boolean;
   handleOnDelete?: (data: any) => void;
 }) => {

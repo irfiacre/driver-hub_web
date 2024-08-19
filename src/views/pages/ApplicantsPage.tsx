@@ -32,7 +32,15 @@ const ApplicantsPage = ({ applicants }: { applicants: Array<any> }) => {
     e.preventDefault();
     setSearchedApplicant(e.target.value);
   };
-  console.log("=====", selectedChatPartner);
+
+  // console.log("----", selectedChatPartner?.onboardingPlan.courses);
+  const finishedCourses =
+    selectedChatPartner?.onboardingPlan.courses.filter(
+      (elt: any) => elt.completed
+    ).length || 0;
+  const totalCourses = selectedChatPartner?.onboardingPlan.courses.length || 0;
+
+  const percentage = Math.round((finishedCourses / totalCourses) * 100);
 
   return (
     <div className="w-full py-10 flex flex-row max-md:flex-col gap-2 text-textDarkColor">
@@ -62,7 +70,7 @@ const ApplicantsPage = ({ applicants }: { applicants: Array<any> }) => {
                 key={application.applicant.userId}
                 photoUrl={application.baseInformation.passportPhotoUrl}
                 name={`${application.applicant.firstName} ${application.applicant.lastName}`}
-                progress={`Progress ${application.onboardingPlan?.progress}%`}
+                progress={`Progress ${percentage}%`}
               />
               <hr />
             </div>
@@ -83,19 +91,16 @@ const ApplicantsPage = ({ applicants }: { applicants: Array<any> }) => {
                 ? `${selectedChatPartner.applicant.firstName} ${selectedChatPartner.applicant.lastName}`
                 : ""
             }
-            overAllProgress={
-              selectedChatPartner
-                ? selectedChatPartner.onboardingPlan.progress
-                : 0
-            }
+            overAllProgress={selectedChatPartner ? percentage : 0}
             onboardingCourses={
               selectedChatPartner
                 ? selectedChatPartner.onboardingPlan.courses
                 : []
             }
-            statistics={
-              selectedChatPartner ? selectedChatPartner.onboardingPlan : {}
-            }
+            statistics={{
+              finishedCourses: finishedCourses,
+              totalCourses: totalCourses,
+            }}
           />
         }
       </BaseCard>
