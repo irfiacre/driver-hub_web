@@ -28,7 +28,7 @@ const ApplicantProgressCard = ({
               height={100}
               width={100}
               className="rounded-full bg-textLightColor border border-borderColorLight object-cover w-24 h-24"
-            />{" "}
+            />
           </div>
           <div>
             <p className="text-textLightColor text-lg font-medium">{name}</p>
