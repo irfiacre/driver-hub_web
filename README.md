@@ -8,7 +8,7 @@ This is a recruitment web application intended mainly as a comprehensive platfor
 
 #### Getting Started
 
-First Clone this [repository](https://github.com/irfiacre/driver-hub_web.git), run these commands:
+First Clone this [repository](https://github.com/irfiacre/driver-hub_web.git), then run these commands:
 
 ```bash
 # Navigate to cloned repo
