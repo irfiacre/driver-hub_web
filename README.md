@@ -8,12 +8,6 @@ This is a recruitment web application intended mainly as a comprehensive platfor
 
 #### Getting Started
 
-1. 
-2. Naviga `cd mobile`
-3. Run ``
-4. Run `npm start`
-5. Choose the platform to run the project on.
-
 First Clone this [repository](https://github.com/irfiacre/driver-hub_web.git), run these commands:
 
 ```bash
