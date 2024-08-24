@@ -90,11 +90,6 @@ const TopSection = () => {
           />
         </div>
       </div>
-      <div className="flex flex-row items-center justify-center pt-6 gap-2">
-        <div className="w-2.5 h-2.5 rounded-full bg-primary"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-primary/10"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-primary/10"></div>
-      </div>
     </section>
   );
 };
