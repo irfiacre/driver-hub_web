@@ -8,7 +8,7 @@ const FourthSection = () => {
   const testimonies = [
     {
       image: "https://i.pravatar.cc/450?u=20",
-      name: "Josephine Michelson",
+      name: "Josephine Michelson ",
       text: "I was initially nervous about switching to a new cab company, but Yego Innovision's onboarding process put all my worries to rest. It was straightforward, efficient, and tailored to meet my needs. The training and resources provided have equipped me with everything I need to excel. I’m proud to be part of a company that prioritizes the success and satisfaction of its drivers.",
     },
     {
